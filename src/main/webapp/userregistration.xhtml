@@ -11,6 +11,27 @@
 </h:head>
 <h:body>
 
+    <h:form style="width:400px;">
+        <p:menubar>
+            <p:submenu label="File">
+                <p:submenu label="Open">
+                    <p:menuitem value="Open Excel File"></p:menuitem>
+                    <p:menuitem value="Open Word File"></p:menuitem>
+                    <p:menuitem value="Open Power Point File"></p:menuitem>
+                </p:submenu>
+                <p:menuitem value="Edit"></p:menuitem>
+                <p:separator/>
+                <p:menuitem value="Exit"></p:menuitem>
+            </p:submenu>
+            <p:submenu label="Help">
+                <p:menuitem value="About JournalDev"></p:menuitem>
+                <p:menuitem value="Contact Us"></p:menuitem>
+                <p:separator/>
+                <p:menuitem value="Help"></p:menuitem>
+            </p:submenu>
+        </p:menubar>
+    </h:form>
+
     <h2>Registration Form</h2>
     <h:form>
         <p:growl id="growl"/>
