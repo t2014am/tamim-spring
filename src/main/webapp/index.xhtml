@@ -4,10 +4,41 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <script name="jquery/jquery.js" library="primefaces"></script>
-    <title>Register Employee</title>
+    <script type="jquery/jquery.js" src="primefaces"></script>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Webshop</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.css" rel="stylesheet"/>
+    <!-- Your custom styles (optional) -->
+    <link href="Scss/style.css" rel="stylesheet"/>
 </h:head>
 <h:body>
-    <h:outputText value="#{helloWorldController.helloWorld}" />
+
+
+    <!-- Start your project here-->
+    <div style="height: 100vh">
+        <div class="flex-center flex-column">
+            <h:outputText class="animated fadeIn mb-4" value="#{helloWorldController.helloWorld}" />
+        </div>
+    </div>
+    <!-- /Start your project here-->
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+
 </h:body>
 </html>
