@@ -16,19 +16,102 @@
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.css" rel="stylesheet"/>
-    <!-- Your custom styles (optional) -->
-    <link href="Scss/style.css" rel="stylesheet"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,‌​100italic,300,300ita‌​lic,400italic,500,50‌​0italic,700,700itali‌​c,900italic,900' rel='stylesheet' type='text/css'/>
 </h:head>
 <h:body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark black">
 
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="#">Webshop</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Shoppingcart</a>
+                </li>
+
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+
+            </ul>
+            <!-- Links -->
+
+            <!-- Search form -->
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
+            </form>
+        </div><!-- Collapsible content -->
+
+    </nav>
+    <!--/.Navbar-->
 
     <!-- Start your project here-->
     <div style="height: 100vh">
         <div class="flex-center flex-column">
-            <h:outputText class="animated fadeIn mb-4" value="#{helloWorldController.helloWorld}" />
+            <h:outputText class="animated fadeIn mb-4 " data-wow-delay="20s" value="#{helloWorldController.helloWorld}" />
         </div>
     </div>
     <!-- /Start your project here-->
+    <!--Footer-->
+
+    <footer class="page-footer black center-on-small-only">
+
+        <!--Footer Links-->
+        <div class="container-fluid">
+            <div class="row">
+
+                <!--First column-->
+                <div class="col-md-6">
+                    <h5 class="title">Footer Content</h5>
+                    <p>This is a webshop</p>
+                </div>
+                <!--/.First column-->
+
+                <!--Second column-->
+                <div class="col-md-6">
+                    <h5 class="title">Links</h5>
+                    <ul>
+                        <li><a href="https://www.thomasmore.be">Thomas More</a></li>
+                    </ul>
+                </div>
+                <!--/.Second column-->
+            </div>
+        </div>
+        <!--/.Footer Links-->
+
+        <!--Copyright-->
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2015 Copyright: Team 2
+
+            </div>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
