@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.realdolmen.thomasmore.dao"
+        basePackages = "com.realdolmen.thomasmore.repository"
 )
 @EnableTransactionManagement
 public class ApplicationConfiguration {
