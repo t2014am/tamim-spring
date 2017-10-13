@@ -35,12 +35,15 @@
         <p:password id="password" value="#{userController.newUserPassword}"
                     required="true"
                     requiredMessage="Password is required"
-                    validatorMessage="Password should be of length from 5 to 15 chars">
+                    match="passwordCheck"
+                    validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match">
             <f:validateLength minimum="5" maximum="15" for="password"/>
         </p:password> <br/>
         <p:watermark value="Password" for="password"/>
 
-        <p:password id="passwordCheck" value="#{userController.newUserPassword}"/> <br/>
+        <p:password id="passwordCheck"
+                    required="true"
+                    requiredMessage="Password is required"/> <br/>
         <p:watermark value="Password" for="passwordCheck"/>
 
 
