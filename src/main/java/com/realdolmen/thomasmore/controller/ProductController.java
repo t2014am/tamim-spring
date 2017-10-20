@@ -27,7 +27,6 @@ public class ProductController {
     }
 
     public void createProduct() {
-        addMessage("create product");
         productService.createProduct(newName,newPrice,newDescription,newStock);
         addMessage("Product toegevoegd!");
         clearForm();
@@ -35,9 +34,7 @@ public class ProductController {
 
     private void clearForm() {
         newName = null;
-        newPrice = 0;
         newDescription = null;
-        newStock = 0;
     }
 
     private void addMessage(String summary) {
