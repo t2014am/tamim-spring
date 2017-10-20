@@ -14,10 +14,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet"/>
+    <!-- Own css -->
+    <link href="css/style.css" rel="stylesheet"/>
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.css" rel="stylesheet"/>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,‌​100italic,300,300ita‌​lic,400italic,500,50‌​0italic,700,700itali‌​c,900italic,900' rel='stylesheet' type='text/css'/>
+
+    <!-- javascript ui -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
 </h:head>
 <h:body>
     <!--Navbar-->
@@ -68,19 +74,63 @@
     <!--/.Navbar-->
 
     <!-- Start your project here-->
-    <div style="height: 100vh">
-        <div class="flex-center flex-column">
-            <h:outputText class="animated fadeIn mb-4 " value="#{helloWorldController.helloWorld}" />
+    <h2>Registration Form</h2>
+    <h:form>
+        <p:growl id="growl"/>
+        <div>
+            <label for="firstName" class="col-md-4">First name: </label>
+            <p:inputText id="firstName" value="#{userController.newUserFirstName}" required="true" requiredMessage="First Name is required" placeholder="First name" class="col-md-4"></p:inputText>
         </div>
-    </div>
 
-    <br/>
+        <div>
+            <label for="lastName" class="col-md-4">Last name: </label>
+            <p:inputText id="lastName" value="#{userController.newUserLastName}" placeholder="Last name" class="col-md-4"/>
+        </div>
+
+        <div>
+            <label for="email" class="col-md-4">Email: </label>
+            <p:inputText id="email" value="#{userController.newUserEmail}" validatorMessage="Invalid Email" placeholder="Email" class="col-md-4">
+                <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
+            </p:inputText>
+        </div>
+
+        <div>
+            <label for="tel" class="col-md-4">Telephone number: </label>
+            <p:inputText id="tel" value="#{userController.newUserTel}" placeholder="Telephone number" class="col-md-4"/>
+        </div>
+
+        <div>
+            <label for="password" class="col-md-4">Password: </label>
+            <p:password id="password" value="#{userController.newUserPassword}" required="true" requiredMessage="Password is required" match="passwordCheck" validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match" placeholder="Password" class="col-md-4">
+                <f:validateLength minimum="5" maximum="15" for="password"/>
+            </p:password>
+        </div>
+
+        <div>
+            <label for="passwordCheck" class="col-md-4">Password check: </label>
+            <p:password id="passwordCheck" required="true" requiredMessage="Password is required" placeholder="Password check" class="col-md-4"/>
+        </div>
+
+
+        <div>
+            <label for="dob" class="col-md-4">Date of birth: </label>
+            <div class="col-md-4">
+                <p:calendar value="#{userController.newUserDob}" id="dob" converterMessage="Invalid Date" pattern="dd-MM-yyyy" navigator="true"></p:calendar>
+            </div>
+        </div>
+
+        <div>
+            <p:commandButton value="Submit" action="#{userController.createUser()}" update="@form" class="col-md-offset-4"/>
+        </div>
+
+    </h:form>
+
 
 
     <!-- /Start your project here-->
     <!--Footer-->
 
-    <footer class="page-footer black center-on-small-only">
+    <footer class="page-footer black">
 
         <!--Footer Links-->
         <div class="container-fluid">
@@ -119,6 +169,9 @@
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
+
+    <!--javascript ui -->
+
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="js/popper.min.js"></script>
@@ -126,6 +179,8 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 </h:body>
 </html>
