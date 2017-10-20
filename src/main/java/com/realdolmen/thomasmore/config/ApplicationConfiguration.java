@@ -18,6 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories(
         basePackages = "com.realdolmen.thomasmore.repository"
+        // .repository contains everything that communicates directly with the database!
 )
 @EnableTransactionManagement
 public class ApplicationConfiguration {
@@ -59,7 +60,10 @@ public class ApplicationConfiguration {
 
     Properties jpaProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        // the create-drop means create the table in the database when we run the project, delete the table when we stop the project!
+        // create means create the tables, but let them be! After we restart the project, it is gonna automatically drop the table and create a new one!
+        // update should be used after we have created the tables!!!
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
 
         return properties;
