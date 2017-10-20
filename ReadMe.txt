@@ -16,6 +16,7 @@ TO-DO:
 
 1) Entities aanmaken
 2) Userregistratie afwerken (CRUD)
+    Password encryption with Spring
 3) Bootstrap primefaces problemen oplossen -> layout
 4) Producten registreren (CRUD)
 5) Tonen in lijst (testen)

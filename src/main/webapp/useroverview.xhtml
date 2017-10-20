@@ -5,31 +5,89 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <script name="jquery/jquery.js" library="primefaces"></script>
-    <title>Register User</title>
+    <title>User Overview</title>
 </h:head>
 <h:body>
+
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <p:dataTable var="user" value="#{userController.getUsers()}">
+                    <p:column headerText="First name">
+                        <h:outputText value="#{user.firstName}"/>
+                    </p:column>
+
+                    <p:column headerText="Last name">
+                        <h:outputText value="#{user.lastName}"/>
+                    </p:column>
+
+                    <p:column headerText="Email">
+                        <h:outputText value="#{user.email}"/>
+                    </p:column>
+
+                    <p:column headerText="Telephone">
+                        <h:outputText value="#{user.tel}"/>
+                    </p:column>
+
+                    <p:column headerText="Date of Birth">
+                        <h:outputText value="#{user.dob}"/>
+                    </p:column>
+
+                    <p:column headerText="Update User">
+                        <p:commandButton value="Update" id="updateUser"
+                                         actionListener="#{userController.updateUser(user)}" ajax="false"/>
+                    </p:column>
+
+                    <p:link outcome="userregistration" value="Bookmark">
+                        <f:param name="productId" value="10"/>
+                    </p:link>
+
+                    <p:column headerText="Delete User">
+                        <p:commandButton value="Delete" id="deleteUser"
+                                         actionListener="#{userController.deleteUserById(user.id)}" ajax="false"/>
+                    </p:column>
+
+                    <p:column headerText="Delete User">
+                        <p:commandLink value="Delete" id="delete2User"
+                                       actionListener="#{userController.deleteUserById(user.id)}" ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+
+    <br/>
+    <br/>
+    <br/>
     <h:form>
 
-        <p:dataTable var="user" value="#{userController.getUsers()}">
+        <p:dataTable var="user" value="#{userController.getUserById('1')}">
             <p:column headerText="First name">
-                <h:outputText value="#{user.firstName}" />
+                <h:outputText value="#{user.firstName}"/>
             </p:column>
 
             <p:column headerText="Last name">
-                <h:outputText value="#{user.lastName}" />
+                <h:outputText value="#{user.lastName}"/>
             </p:column>
 
-            <p:column headerText="Last name">
-                <h:outputText value="#{user.email}" />
+            <p:column headerText="Email">
+                <h:outputText value="#{user.email}"/>
             </p:column>
 
-            <p:column headerText="Last name">
-                <h:outputText value="#{user.tel}" />
+            <p:column headerText="Telephone">
+                <h:outputText value="#{user.tel}"/>
             </p:column>
 
-            <p:column headerText="Last name">
-                <h:outputText value="#{user.dob}" />
+            <p:column headerText="Date of Birth">
+                <h:outputText value="#{user.dob}"/>
             </p:column>
+
+            <p:column headerText="Delete User">
+                <p:commandButton value="Delete"
+                                 actionListener="#{userController.deleteUserById(1)}" ajax="false"/>
+            </p:column>
+
         </p:dataTable>
 
     </h:form>

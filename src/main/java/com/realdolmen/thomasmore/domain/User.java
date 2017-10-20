@@ -20,10 +20,10 @@ public class User implements Serializable {
     private Date dob;
     private String gender;
 
-    @OneToMany (mappedBy="customerUser")
+    @OneToMany (mappedBy="customer")
     private List<SupportTicket> customerUserSupportTickets = new ArrayList<SupportTicket>();
 
-    @OneToMany (mappedBy="supportUser")
+    @OneToMany (mappedBy="support")
     private List<SupportTicket> supportUserSupportTickets = new ArrayList<SupportTicket>();
 
     public Long getId() {
