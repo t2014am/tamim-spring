@@ -27,7 +27,8 @@ public class ProductController {
     }
 
     public void createProduct() {
-        productService.createProduct(newName, newPrice, newDescription, newStock);
+        addMessage("create product");
+        productService.createProduct(newName,newPrice,newDescription,newStock);
         addMessage("Product toegevoegd!");
         clearForm();
     }
@@ -80,7 +81,7 @@ public class ProductController {
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
      */
-    public void setUserService(ProductService productService) {
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 }
