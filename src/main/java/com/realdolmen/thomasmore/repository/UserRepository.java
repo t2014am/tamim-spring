@@ -16,6 +16,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * Beschrijf in de method name wat je wilt dat spring uit de database haalt, zo simpel is het!
      */
     User findByFirstNameAndLastName(String firstName, String lastName);
+
     List<User> findAll();
 
+//    User findById(Long id);
+//
+//    User deleteById(Long id);
 }

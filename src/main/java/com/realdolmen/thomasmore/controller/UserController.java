@@ -2,6 +2,7 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.User;
 import com.realdolmen.thomasmore.service.UserService;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -22,6 +23,7 @@ public class UserController {
     @ManagedProperty("#{userService}")
     private UserService userService;
 
+    private Long userId;
     private String newUserFirstName;
     private String newUserLastName;
     private String newUserEmail;
@@ -35,11 +37,45 @@ public class UserController {
         return userService.findAllUsers();
     }
 
+    public User getUserById(Long id) {
+        return userService.findUserById(id);
+    }
 
-    public void createUser() {
-        userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
-        addMessage("User toegevoegd!");
+    public String deleteUserById(Long id) {
+        userService.deleteUserById(id);
+        addMessage("User Deleted!");
+        return "redirect:/useroverview.xhtml";
+    }
+
+    public RedirectView updateUser(User user) {
+
+        addMessage(user.getFirstName());
+        addMessage(user.getLastName());
+        addMessage("User Update!");
+//        clearForm();
+        System.out.println("user details here: ");
+        System.out.println(user);
+        return new RedirectView("userregistration");
+    }
+
+
+//    public void createUser() {
+//        userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
+//        addMessage("User toegevoegd!");
+//        clearForm();
+//    }
+
+    public String createOrUpdateUser() {
+        if (userId == 0) {
+            userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
+            addMessage("User toegevoegd!");
+        } else {
+            userService.updateUser(userId, newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
+            addMessage("User updated!");
+        }
         clearForm();
+        addMessage("The requested action is done! ");
+        return "redirect:/customer/list";
     }
 
     private void clearForm() {
@@ -48,10 +84,11 @@ public class UserController {
         newUserEmail = null;
         newUserTel = null;
         newUserPassword = null;
+        newUserDob = null;
     }
 
     private void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
@@ -109,6 +146,14 @@ public class UserController {
 
     public void setNewUserGender(Date newUserGender) {
         this.newUserGender = newUserGender;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     /**
