@@ -1,11 +1,10 @@
 package com.realdolmen.thomasmore.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
@@ -20,6 +19,12 @@ public class User implements Serializable {
     private String password;
     private Date dob;
     private String gender;
+
+    @OneToMany (mappedBy="customer")
+    private List<SupportTicket> customerUserSupportTickets = new ArrayList<SupportTicket>();
+
+    @OneToMany (mappedBy="support")
+    private List<SupportTicket> supportUserSupportTickets = new ArrayList<SupportTicket>();
 
     public Long getId() {
         return id;
@@ -83,5 +88,21 @@ public class User implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public List<SupportTicket> getCustomerUserSupportTickets() {
+        return customerUserSupportTickets;
+    }
+
+    public void setCustomerUserSupportTickets(List<SupportTicket> customerUserSupportTickets) {
+        this.customerUserSupportTickets = customerUserSupportTickets;
+    }
+
+    public List<SupportTicket> getSupportUserSupportTickets() {
+        return supportUserSupportTickets;
+    }
+
+    public void setSupportUserSupportTickets(List<SupportTicket> supportUserSupportTickets) {
+        this.supportUserSupportTickets = supportUserSupportTickets;
     }
 }
