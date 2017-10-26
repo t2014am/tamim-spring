@@ -17,13 +17,15 @@ public class ProductController {
     @ManagedProperty("#{productService}")
     private ProductService productService;
 
+    public List<Product> products;
+
     private String newName;
     private int newPrice;
     private String newDescription;
     private int newStock;
 
     public List<Product> getProducts() {
-        return productService.findAllProducts();
+        return products = productService.findAllProducts();
     }
 
     public void createProduct() {
