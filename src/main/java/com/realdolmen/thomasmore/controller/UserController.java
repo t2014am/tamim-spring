@@ -45,15 +45,7 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-<<<<<<< HEAD
     public void deleteUserById(Long id) {
-=======
-    public User getUserByEmail(String email) {
-        return userService.findUserByEmail(email);
-    }
-
-    public String deleteUserById(Long id) {
->>>>>>> 555661cb4c18393b99839c7681dfe93092726e05
         userService.deleteUserById(id);
 //        addMessage("User Deleted!");
 //        return "redirect:/useroverview.xhtml";
