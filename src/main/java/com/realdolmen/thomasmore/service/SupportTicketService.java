@@ -17,16 +17,20 @@ public class SupportTicketService {
     @Autowired
     private SupportTicketRepository supportTicketRepository;
 
-    public void createSupportTicket(User customer, User support, String subject) {
+    public SupportTicket createSupportTicket(User customer, User support, String subject) {
         SupportTicket supportTicket = new SupportTicket();
+        supportTicket.setCustomer(customer);
         supportTicket.setSupport(support);
         supportTicket.setSubject(subject);
 
         supportTicketRepository.save(supportTicket);
+
+        return findSupportTicketById(supportTicket.getId());
     }
 
     public List<SupportTicket> findAllSupportTickets() {
         return supportTicketRepository.findAll();
     }
+    public SupportTicket findSupportTicketById(long id) {return supportTicketRepository.findById(id);}
 
 }
