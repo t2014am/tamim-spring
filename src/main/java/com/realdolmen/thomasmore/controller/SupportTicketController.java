@@ -21,7 +21,7 @@ import java.util.List;
 public class SupportTicketController {
 
     //Autowired kunnen we niet gebruiken in JSF, daarom gebruiken we hier dit om een spring bean te injecteren.
-    @ManagedProperty("#{userService}")
+    @ManagedProperty("#{supportTicketService}")
     private SupportTicketService supportTicketService;
 
     private User newCustomer;
@@ -49,6 +49,30 @@ public class SupportTicketController {
     private void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public User getNewCustomer() {
+        return newCustomer;
+    }
+
+    public void setNewCustomer(User newCustomer) {
+        this.newCustomer = newCustomer;
+    }
+
+    public User getNewSupport() {
+        return newSupport;
+    }
+
+    public void setNewSupport(User newSupport) {
+        this.newSupport = newSupport;
+    }
+
+    public String getNewSubject() {
+        return newSubject;
+    }
+
+    public void setNewSubject(String newSubject) {
+        this.newSubject = newSubject;
     }
 
     /**
