@@ -10,34 +10,64 @@
     <title>Productlist</title>
 </h:head>
 <h:body>
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
 
-    <h2>Add product</h2>
-    <h:form>
-        <p:growl id="growl"/>
+            <h4>Add product</h4>
+            <h:form>
+                <p:growl id="growl"/>
 
-        <!--Inputveld voor naam van product-->
-        <p:inputText id="name" value="#{productController.newName}"
-                     required="true"
-                     requiredMessage="Name is required">
-        </p:inputText> <br/>
-        <p:watermark value="Name" for="name"/>
+                <!--Inputveld voor naam van product-->
+                <p>Name:</p>
+                <p:inputText id="name" value="#{productController.newName}"
+                             required="true"
+                             requiredMessage="Name is required">
+                </p:inputText> <br/>
+                <p:watermark value="Name" for="name"/>
 
-        <!--Inputveld voor prijs van product-->
-        <p:inputText id="price" value="#{productController.newPrice}"/> <br/>
-        <p:watermark value="Price" for="price"/>
+                <!--Inputveld voor prijs van product-->
+                <p>Price:</p>
+                <p:inputText id="price" value="#{productController.newPrice}"/> <br/>
+                <p:watermark value="Price" for="price"/>
 
-        <!--Inputveld voor omschrijving van product-->
-        <p:inputText id="description" value="#{productController.newDescription}"/><br/>
-        <p:watermark value="Description" for="description"/>
+                <!--Inputveld voor omschrijving van product-->
+                <p>Description:</p>
+                <p:inputText id="description" value="#{productController.newDescription}"/><br/>
+                <p:watermark value="Description" for="description"/>
 
-        <!--Inputveld voor stock van product-->
-        <p:inputText id="stock" value="#{productController.newStock}"/> <br/>
-        <p:watermark value="Stock" for="stock"/>
+                <!--Inputveld voor stock van product-->
+                <p>Stock:</p>
+                <p:inputText id="stock" value="#{productController.newStock}"/> <br/>
+                <p:watermark value="Stock" for="stock"/>
 
 
-        <br/>
-        <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form"/>
-    </h:form>
+                <br/>
+                <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form"/>
+            </h:form>
+
+            <h4>Productlist</h4>
+            <h:form>
+                <p:dataTable var="product" value="#{productController.products}">
+                    <p:column headerText="Name">
+                        <h:outputText value="#{product.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Price">
+                        <h:outputText value="#{product.price}"/>
+                    </p:column>
+
+                    <p:column headerText="Description">
+                        <h:outputText value="#{product.description}"/>
+                    </p:column>
+
+                    <p:column headerText="Stock">
+                        <h:outputText value="#{product.stock}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
 
 </h:body>

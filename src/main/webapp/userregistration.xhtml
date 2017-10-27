@@ -11,85 +11,95 @@
 </h:head>
 <h:body>
 
-    <h:form style="width:400px;">
-        <p:menubar>
-            <p:submenu label="File">
-                <p:submenu label="Open">
-                    <p:menuitem value="Open Excel File"></p:menuitem>
-                    <p:menuitem value="Open Word File"></p:menuitem>
-                    <p:menuitem value="Open Power Point File"></p:menuitem>
-                </p:submenu>
-                <p:menuitem value="Edit"></p:menuitem>
-                <p:separator/>
-                <p:menuitem value="Exit"></p:menuitem>
-            </p:submenu>
-            <p:submenu label="Help">
-                <p:menuitem value="About JournalDev"></p:menuitem>
-                <p:menuitem value="Contact Us"></p:menuitem>
-                <p:separator/>
-                <p:menuitem value="Help"></p:menuitem>
-            </p:submenu>
-        </p:menubar>
-    </h:form>
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+            <h:form style="width:400px;">
+                <p:menubar>
+                    <p:submenu label="File">
+                        <p:submenu label="Open">
+                            <p:menuitem value="Open Excel File"></p:menuitem>
+                            <p:menuitem value="Open Word File"></p:menuitem>
+                            <p:menuitem value="Open Power Point File"></p:menuitem>
+                        </p:submenu>
+                        <p:menuitem value="Edit"></p:menuitem>
+                        <p:separator/>
+                        <p:menuitem value="Exit"></p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Help">
+                        <p:menuitem value="About JournalDev"></p:menuitem>
+                        <p:menuitem value="Contact Us"></p:menuitem>
+                        <p:separator/>
+                        <p:menuitem value="Help"></p:menuitem>
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
 
-    <h2>Registration Form</h2>
-    <h:form>
-        <p:growl id="growl"/>
-        <p:inputText id="firstName" value="#{userController.newUserFirstName}"
-                     required="true"
-                     requiredMessage="First Name is required">
-        </p:inputText> <br/>
-        <p:watermark value="First name" for="firstName"/>
-
-        <p:inputText id="lastName" value="#{userController.newUserLastName}"/> <br/>
-        <p:watermark value="Last name" for="lastName"/>
-
-        <p:inputText id="email" value="#{userController.newUserEmail}"
-                     validatorMessage="Invalid Email">
-            <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
-        </p:inputText> <br/>
-        <p:watermark value="Email" for="email"/>
-
-        <p:inputText id="tel" value="#{userController.newUserTel}"/> <br/>
-        <p:watermark value="Telephone Number" for="tel"/>
-
-        <p:password id="password" value="#{userController.newUserPassword}"
-                    required="true"
-                    requiredMessage="Password is required"
-                    match="passwordCheck"
-                    validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match">
-            <f:validateLength minimum="5" maximum="15" for="password"/>
-        </p:password> <br/>
-        <p:watermark value="Password" for="password"/>
-
-        <p:password id="passwordCheck"
-                    required="true"
-                    requiredMessage="Password is required"/> <br/>
-        <p:watermark value="Password" for="passwordCheck"/>
+            <h2>Registration Form</h2>
+            <h:form>
+                <p:growl id="growl"/>
+                <p:inputText id="id" value="#{userController.userId}"/><br/>
 
 
-        <p:calendar value="#{userController.newUserDob}"
-                    id="dob"
-                    converterMessage="Invalid Date"
-                    pattern="dd-MM-yyyy">
-            <p:watermark value="Date of Birth" for="dob"/>
+                <p:inputText id="firstName" value="#{userController.newUserFirstName}"
+                             required="true"
+                             requiredMessage="First Name is required">
+                </p:inputText> <br/>
+                <p:watermark value="First name" for="firstName"/>
 
-        </p:calendar>
-        <p:message for="dob"/>
+                <p:inputText id="lastName" value="#{userController.newUserLastName}"/> <br/>
+                <p:watermark value="Last name" for="lastName"/>
 
-        <!--<br/>-->
-        <!--<h:outputLabel value="Gender"/>-->
-        <!--<h:selectOneRadio id="gender"-->
-        <!--value="#{userController.newUserGender}">-->
-        <!--<f:selectItems value="#{registrationBean.genders}"-->
-        <!--var="gOp"-->
-        <!--itemLabel="#{gOp}"-->
-        <!--itemValue="#{gOp}"/>-->
-        <!--</h:selectOneRadio>-->
-        <!--<p:message for="gender"/>-->
+                <p:inputText id="email" value="#{userController.newUserEmail}"
+                             validatorMessage="Invalid Email">
+                    <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
+                </p:inputText> <br/>
+                <p:watermark value="Email" for="email"/>
 
-        <br/>
-        <p:commandButton value="Submit" action="#{userController.createUser()}" update="@form"/>
-    </h:form>
+                <p:inputText id="tel" value="#{userController.newUserTel}"/> <br/>
+                <p:watermark value="Telephone Number" for="tel"/>
+
+                <p:password id="password" value="#{userController.newUserPassword}"
+                            required="true"
+                            requiredMessage="Password is required"
+                            match="passwordCheck"
+                            validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match">
+                    <f:validateLength minimum="5" maximum="15" for="password"/>
+                </p:password> <br/>
+                <p:watermark value="Password" for="password"/>
+
+                <p:password id="passwordCheck"
+                            required="true"
+                            requiredMessage="Password is required"/> <br/>
+                <p:watermark value="Password" for="passwordCheck"/>
+
+
+                <p:calendar value="#{userController.newUserDob}"
+                            id="dob"
+                            converterMessage="Invalid Date"
+                            pattern="dd-MM-yyyy">
+                    <p:watermark value="Date of Birth" for="dob"/>
+
+                </p:calendar>
+                <p:message for="dob"/>
+
+                <!--<br/>-->
+                <!--<h:outputLabel value="Gender"/>-->
+                <!--<h:selectOneRadio id="gender"-->
+                <!--value="#{userController.newUserGender}">-->
+                <!--<f:selectItems value="#{registrationBean.genders}"-->
+                <!--var="gOp"-->
+                <!--itemLabel="#{gOp}"-->
+                <!--itemValue="#{gOp}"/>-->
+                <!--</h:selectOneRadio>-->
+                <!--<p:message for="gender"/>-->
+
+                <br/>
+
+                <p:commandButton value="Submit CreateOrUpdate" action="#{userController.createOrUpdateUser()}"
+                                 update="@form"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
 </h:body>
 </html>

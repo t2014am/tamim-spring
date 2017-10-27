@@ -17,26 +17,26 @@ public class ProductController {
     @ManagedProperty("#{productService}")
     private ProductService productService;
 
+    public List<Product> products;
+
     private String newName;
     private int newPrice;
     private String newDescription;
     private int newStock;
 
     public List<Product> getProducts() {
-        return productService.findAllProducts();
+        return products = productService.findAllProducts();
     }
 
     public void createProduct() {
-        productService.createProduct(newName, newPrice, newDescription, newStock);
+        productService.createProduct(newName,newPrice,newDescription,newStock);
         addMessage("Product toegevoegd!");
         clearForm();
     }
 
     private void clearForm() {
         newName = null;
-        newPrice = 0;
         newDescription = null;
-        newStock = 0;
     }
 
     private void addMessage(String summary) {
@@ -80,7 +80,7 @@ public class ProductController {
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
      */
-    public void setUserService(ProductService productService) {
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 }
