@@ -41,6 +41,10 @@ public class UserController {
         return userService.findUserById(id);
     }
 
+    public User getUserByEmail(String email) {
+        return userService.findUserByEmail(email);
+    }
+
     public String deleteUserById(Long id) {
         userService.deleteUserById(id);
         addMessage("User Deleted!");

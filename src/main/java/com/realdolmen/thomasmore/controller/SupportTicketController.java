@@ -24,6 +24,9 @@ public class SupportTicketController {
     @ManagedProperty("#{supportTicketService}")
     private SupportTicketService supportTicketService;
 
+    @ManagedProperty("#{userService}")
+    private UserService userService;
+
     private User newCustomer;
     private User newSupport;
     private String newSubject;
@@ -35,6 +38,8 @@ public class SupportTicketController {
 
 
     public void createSupportTicket() {
+        this.newCustomer = userService.findUserByEmail("tamim@asefi.com");
+        this.newSupport = userService.findUserByEmail("dries@donckers.com");
         supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
         addMessage("Support ticket toegevoegd!");
         clearForm();
@@ -80,5 +85,9 @@ public class SupportTicketController {
      */
     public void setSupportTicketService(SupportTicketService supportTicketService) {
         this.supportTicketService = supportTicketService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

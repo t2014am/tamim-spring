@@ -41,7 +41,7 @@
         </p:inputText> <br/>
         <p:watermark value="Subject" for="subject"/>
 
-        <p:selectOneMenu id="customer" value="#{supportTicketController.newCustomer}" converter="omnifaces.SelectItemsConverter">
+        <!--<p:selectOneMenu id="customer" value="#{supportTicketController.newCustomer}" converter="omnifaces.SelectItemsConverter">
             <f:selectItems  value="#{userController.getUsers()}"/>
         </p:selectOneMenu>
         <p:watermark value="Customer" for="customer"/>
@@ -49,7 +49,7 @@
         <p:selectOneMenu id="support" value="#{supportTicketController.newSupport}" converter="omnifaces.SelectItemsConverter">
             <f:selectItems  value="#{userController.getUsers()}"/>
         </p:selectOneMenu>
-        <p:watermark value="Customer" for="customer"/>
+        <p:watermark value="Customer" for="customer"/>-->
 
         <br/>
         <p:commandButton value="Submit" action="#{supportTicketController.createSupportTicket()}" update="@form"/>
