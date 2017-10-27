@@ -7,6 +7,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.Date;
@@ -16,14 +17,14 @@ import java.util.List;
  * Created by JUZAU33 on 28/09/2017.
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class UserController {
 
     //Autowired kunnen we niet gebruiken in JSF, daarom gebruiken we hier dit om een spring bean te injecteren.
     @ManagedProperty("#{userService}")
     private UserService userService;
 
-    private Long userId;
+    private Long userId = new Long(0);
     private String newUserFirstName;
     private String newUserLastName;
     private String newUserEmail;
@@ -32,30 +33,29 @@ public class UserController {
     private Date newUserDob;
     private Date newUserGender;
 
+    private User user;
+
 
     public List<User> getUsers() {
         return userService.findAllUsers();
     }
 
     public User getUserById(Long id) {
+        System.out.println("getUserById detail here: " + id);
         return userService.findUserById(id);
     }
 
-    public String deleteUserById(Long id) {
+    public void deleteUserById(Long id) {
         userService.deleteUserById(id);
-        addMessage("User Deleted!");
-        return "redirect:/useroverview.xhtml";
+//        addMessage("User Deleted!");
+//        return "redirect:/useroverview.xhtml";
     }
 
-    public RedirectView updateUser(User user) {
-
-        addMessage(user.getFirstName());
-        addMessage(user.getLastName());
-        addMessage("User Update!");
-//        clearForm();
-        System.out.println("user details here: ");
-        System.out.println(user);
-        return new RedirectView("userregistration");
+    public String updateUser(User user) {
+        this.user = user;
+        System.out.println("user details here: " + this.user.getFirstName() +  ' ' + user.getFirstName());
+        System.out.println(user.getLastName());
+        return "userupdate";
     }
 
 
@@ -66,7 +66,7 @@ public class UserController {
 //    }
 
     public String createOrUpdateUser() {
-        if (userId == 0) {
+        if (userId == 0 ) {
             userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
             addMessage("User toegevoegd!");
         } else {
@@ -154,6 +154,14 @@ public class UserController {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**

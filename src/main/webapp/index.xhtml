@@ -32,67 +32,7 @@
         <ui:define name="content">
             <h3>Startup page content! Maybe something people wanna see when they open the website! </h3>
             <br/>
-            <h2>Registration Form</h2>
-            <h:form>
-                <p:growl id="growl"/>
-                <div>
-                    <label for="firstName" class="col-md-4">First name: </label>
-                    <p:inputText id="firstName" value="#{userController.newUserFirstName}" required="true"
-                                 requiredMessage="First Name is required" placeholder="First name"
-                                 class="col-md-4"></p:inputText>
-                </div>
 
-                <div>
-                    <label for="lastName" class="col-md-4">Last name: </label>
-                    <p:inputText id="lastName" value="#{userController.newUserLastName}" placeholder="Last name"
-                                 class="col-md-4"/>
-                </div>
-
-                <div>
-                    <label for="email" class="col-md-4">Email: </label>
-                    <p:inputText id="email" value="#{userController.newUserEmail}" validatorMessage="Invalid Email"
-                                 placeholder="Email" class="col-md-4">
-                        <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
-                    </p:inputText>
-                </div>
-
-                <div>
-                    <label for="tel" class="col-md-4">Telephone number: </label>
-                    <p:inputText id="tel" value="#{userController.newUserTel}" placeholder="Telephone number"
-                                 class="col-md-4"/>
-                </div>
-
-                <div>
-                    <label for="password" class="col-md-4">Password: </label>
-                    <p:password id="password" value="#{userController.newUserPassword}" required="true"
-                                requiredMessage="Password is required" match="passwordCheck"
-                                validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match"
-                                placeholder="Password" class="col-md-4">
-                        <f:validateLength minimum="5" maximum="15" for="password"/>
-                    </p:password>
-                </div>
-
-                <div>
-                    <label for="passwordCheck" class="col-md-4">Password check: </label>
-                    <p:password id="passwordCheck" required="true" requiredMessage="Password is required"
-                                placeholder="Password check" class="col-md-4"/>
-                </div>
-
-
-                <div>
-                    <label for="dob" class="col-md-4">Date of birth: </label>
-                    <div class="col-md-4">
-                        <p:calendar value="#{userController.newUserDob}" id="dob" converterMessage="Invalid Date"
-                                    pattern="dd-MM-yyyy" navigator="true"></p:calendar>
-                    </div>
-                </div>
-
-                <div>
-                    <p:commandButton value="Submit" action="#{userController.createUser()}" update="@form"
-                                     class="col-md-offset-4"/>
-                </div>
-
-            </h:form>
         </ui:define>
     </ui:composition>
 

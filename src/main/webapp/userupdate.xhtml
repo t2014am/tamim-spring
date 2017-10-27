@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<h:body>
+
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+
+            <!-- VIEW THE USER DATA!!! -->
+            <h2>VIEW THE USER DATA!!! </h2>
+            <h:form>
+                <p:dataTable var="user" value="#{userController.getUserById(userController.user.id)}">
+                    <p:column headerText="First name">
+                        <h:outputText value="#{user.getFirstName()}"/>
+                    </p:column>
+
+                    <p:column headerText="Last name">
+                        <h:outputText value="#{user.getLastName()}"/>
+                    </p:column>
+
+                    <p:column headerText="Email">
+                        <h:outputText value="#{user.getEmail()}"/>
+                    </p:column>
+
+                    <p:column headerText="Telephone">
+                        <h:outputText value="#{user.getTel()}"/>
+                    </p:column>
+
+                    <p:column headerText="Date of Birth">
+                        <h:outputText value="#{user.getDob()}"/>
+                    </p:column>
+
+                    <p:column headerText="Update User">
+                        <p:commandButton value="Update" id="updateUser2"
+                                         action="#{userController.updateUser(user)}" ajax="true"/>
+                    </p:column>
+
+                    <!--<p:link outcome="userregistration" value="Bookmark">-->
+                    <!--<f:param name="productId" value="10"/>-->
+                    <!--</p:link>-->
+
+                    <p:column headerText="Delete User">
+                        <p:commandButton value="Delete" id="deleteUser"
+                                         actionListener="#{userController.deleteUserById(user.id)}" update="@form"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+
+
+            <h2>Registration Form</h2>
+            <h:form>
+                <p:growl id="growl"/>
+                <p:inputText id="id" value="#{userController.user.id}"/><br/>
+
+
+                <div>
+                    <label for="firstName" class="col-md-4">First name: </label>
+                    <p:inputText id="firstName" value="#{userController.user.firstName}" required="true"
+                                 requiredMessage="First Name is required" placeholder="First name"
+                                 class="col-md-4"/>
+                </div>
+
+                <div>
+                    <label for="lastName" class="col-md-4">Last name: </label>
+                    <p:inputText id="lastName" value="#{userController.user.lastName}" placeholder="Last name"
+                                 class="col-md-4"/>
+                </div>
+
+                <div>
+                    <label for="email" class="col-md-4">Email: </label>
+                    <p:inputText id="email" value="#{userController.user.email}" validatorMessage="Invalid Email"
+                                 placeholder="Email" class="col-md-4">
+                        <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
+                    </p:inputText>
+                </div>
+
+                <div>
+                    <label for="tel" class="col-md-4">Telephone number: </label>
+                    <p:inputText id="tel" value="#{userController.user.tel}" placeholder="Telephone number"
+                                 class="col-md-4"/>
+                </div>
+
+                <div>
+                    <label for="password" class="col-md-4">Password: </label>
+                    <p:password id="password" value="#{userController.user.password}"
+                                required="true"
+                                requiredMessage="Password is required"
+                                match="passwordCheck"
+                                validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match"
+                                placeholder="Password" class="col-md-4">
+                        <f:validateLength minimum="5" maximum="15" for="password"/>
+                    </p:password>
+                </div>
+
+                <div>
+                    <label for="passwordCheck" class="col-md-4">Password check: </label>
+                    <p:password id="passwordCheck" required="true" requiredMessage="Password is required"
+                                placeholder="Password check" class="col-md-4"/>
+                </div>
+
+                <div>
+                    <label for="dob" class="col-md-4">Date of birth: </label>
+                    <div class="col-md-4">
+                        <p:calendar value="#{userController.user.dob}"
+                                    id="dob"
+                                    converterMessage="Invalid Date"
+                                    pattern="dd-MM-yyyy"
+                                    navigator="true"
+                                    class="col-md-4"/>
+                    </div>
+                </div>
+
+                <div>
+                    <p:commandButton value="Submit" action="#{userController.createOrUpdateUser()}" update="@form"
+                                     class="col-md-offset-4"/>
+                </div>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+</html>
