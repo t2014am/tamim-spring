@@ -52,6 +52,10 @@
         <p:watermark value="Customer" for="customer"/>-->
 
         <br/>
+        <p:inputTextarea rows="5" cols="30" id="supportText" value="#{supportTicketController.messageToSend}"
+                     required="true"
+                     requiredMessage="Message is required">
+        </p:inputTextarea> <br/><br/>
         <p:commandButton value="Submit" action="#{supportTicketController.createSupportTicket()}" update="@form"/>
     </h:form>
 </h:body>

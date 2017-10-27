@@ -2,6 +2,7 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.SupportTicket;
 import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.service.MessageService;
 import com.realdolmen.thomasmore.service.SupportTicketService;
 import com.realdolmen.thomasmore.service.UserService;
 
@@ -27,9 +28,13 @@ public class SupportTicketController {
     @ManagedProperty("#{userService}")
     private UserService userService;
 
+    @ManagedProperty("#{messageService}")
+    private MessageService messageService;
+
     private User newCustomer;
     private User newSupport;
     private String newSubject;
+    private String messageToSend;
 
 
     public List<SupportTicket> getSupportTickets() {
@@ -37,11 +42,21 @@ public class SupportTicketController {
     }
 
 
-    public void createSupportTicket() {
-        this.newCustomer = userService.findUserByEmail("tamim@asefi.com");
+    /*public void createSupportTicket() {
+        this.newCustomer = userService.findUserByEmail("dries@donckers.com");
         this.newSupport = userService.findUserByEmail("dries@donckers.com");
         supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
         addMessage("Support ticket toegevoegd!");
+        clearForm();
+    }*/
+
+    public void createSupportTicket() {
+        this.newCustomer = userService.findUserByEmail("dries@donckers.com");
+        this.newSupport = userService.findUserByEmail("dries@donckers.com");
+        SupportTicket addedTicket = supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
+        addMessage("Support ticket toegevoegd!");
+        messageService.createMessage(addedTicket, messageToSend, false);
+        addMessage("Bericht verstuurd!");
         clearForm();
     }
 
@@ -80,6 +95,14 @@ public class SupportTicketController {
         this.newSubject = newSubject;
     }
 
+    public String getMessageToSend() {
+        return messageToSend;
+    }
+
+    public void setMessageToSend(String messageToSend) {
+        this.messageToSend = messageToSend;
+    }
+
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
      */
@@ -89,5 +112,9 @@ public class SupportTicketController {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
     }
 }
