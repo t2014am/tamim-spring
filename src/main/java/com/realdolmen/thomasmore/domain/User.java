@@ -105,4 +105,9 @@ public class User implements Serializable {
     public void setSupportUserSupportTickets(List<SupportTicket> supportUserSupportTickets) {
         this.supportUserSupportTickets = supportUserSupportTickets;
     }
+
+    @Override
+    public String toString() {
+        return email;
+    }
 }

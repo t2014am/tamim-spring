@@ -2,6 +2,7 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.SupportTicket;
 import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.service.MessageService;
 import com.realdolmen.thomasmore.service.SupportTicketService;
 import com.realdolmen.thomasmore.service.UserService;
 
@@ -21,12 +22,19 @@ import java.util.List;
 public class SupportTicketController {
 
     //Autowired kunnen we niet gebruiken in JSF, daarom gebruiken we hier dit om een spring bean te injecteren.
-    @ManagedProperty("#{userService}")
+    @ManagedProperty("#{supportTicketService}")
     private SupportTicketService supportTicketService;
+
+    @ManagedProperty("#{userService}")
+    private UserService userService;
+
+    @ManagedProperty("#{messageService}")
+    private MessageService messageService;
 
     private User newCustomer;
     private User newSupport;
     private String newSubject;
+    private String messageToSend;
 
 
     public List<SupportTicket> getSupportTickets() {
@@ -34,9 +42,21 @@ public class SupportTicketController {
     }
 
 
-    public void createSupportTicket() {
+    /*public void createSupportTicket() {
+        this.newCustomer = userService.findUserByEmail("dries@donckers.com");
+        this.newSupport = userService.findUserByEmail("dries@donckers.com");
         supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
         addMessage("Support ticket toegevoegd!");
+        clearForm();
+    }*/
+
+    public void createSupportTicket() {
+        this.newCustomer = userService.findUserByEmail("dries@donckers.com");
+        this.newSupport = userService.findUserByEmail("dries@donckers.com");
+        SupportTicket addedTicket = supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
+        addMessage("Support ticket toegevoegd!");
+        messageService.createMessage(addedTicket, messageToSend, false);
+        addMessage("Bericht verstuurd!");
         clearForm();
     }
 
@@ -51,10 +71,50 @@ public class SupportTicketController {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    public User getNewCustomer() {
+        return newCustomer;
+    }
+
+    public void setNewCustomer(User newCustomer) {
+        this.newCustomer = newCustomer;
+    }
+
+    public User getNewSupport() {
+        return newSupport;
+    }
+
+    public void setNewSupport(User newSupport) {
+        this.newSupport = newSupport;
+    }
+
+    public String getNewSubject() {
+        return newSubject;
+    }
+
+    public void setNewSubject(String newSubject) {
+        this.newSubject = newSubject;
+    }
+
+    public String getMessageToSend() {
+        return messageToSend;
+    }
+
+    public void setMessageToSend(String messageToSend) {
+        this.messageToSend = messageToSend;
+    }
+
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
      */
     public void setSupportTicketService(SupportTicketService supportTicketService) {
         this.supportTicketService = supportTicketService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
     }
 }
