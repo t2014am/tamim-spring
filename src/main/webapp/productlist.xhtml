@@ -40,31 +40,43 @@
                 <p:inputText id="stock" value="#{productController.newStock}"/> <br/>
                 <p:watermark value="Stock" for="stock"/>
 
-
                 <br/>
                 <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form"/>
             </h:form>
 
             <h4>Productlist</h4>
             <h:form>
-                <p:dataTable var="product" value="#{productController.products}">
-                    <p:column headerText="Name">
-                        <h:outputText value="#{product.name}"/>
-                    </p:column>
+                <p:repeat value="#{productController.products}" var="product">
+                    <h:panelGrid columns="2" style="width:100%">
 
-                    <p:column headerText="Price">
-                        <h:outputText value="#{product.price}"/>
-                    </p:column>
 
-                    <p:column headerText="Description">
-                        <h:outputText value="#{product.description}"/>
-                    </p:column>
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Name:"/>
+                                <h:outputText value="#{product.name}"/>
 
-                    <p:column headerText="Stock">
-                        <h:outputText value="#{product.stock}"/>
-                    </p:column>
+                                <h:outputText value="Price:"/>
+                                <h:outputText value="#{product.price}"/>
 
-                </p:dataTable>
+                                <h:outputText value="Description:"/>
+                                <h:outputText value="#{product.description}"/>
+
+                                <h:outputText value="Stock:"/>
+                                <h:outputText value="#{product.stock}"/>
+
+                                <p:column headerText="Delete product">
+                                    <p:commandLink value="Delete" id="deleteProduct"
+                                                   actionListener="#{productController.deleteProduct(product.id)}"
+                                                   ajax="false"/>
+                                </p:column>
+                                <p:column headerText="Update product">
+                                    <p:commandLink value="Update" id="updateProduct"
+                                                   action="#{productController.toUpdatePage(product.id)}" ajax="false"/>
+                                </p:column>
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:repeat>
             </h:form>
         </ui:define>
     </ui:composition>

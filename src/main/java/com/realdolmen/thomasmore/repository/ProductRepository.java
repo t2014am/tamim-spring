@@ -15,8 +15,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     /**
      * Beschrijf in de method name wat je wilt dat spring uit de database haalt, zo simpel is het!
      */
-    Product findByName(String name);
+    Product findProductById(Long id);
     List<Product> findAll();
+    // Product deleteById(Long id);
 
 
 }

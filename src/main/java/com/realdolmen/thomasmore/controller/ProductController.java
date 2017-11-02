@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 @ManagedBean
@@ -18,7 +20,9 @@ public class ProductController {
     private ProductService productService;
 
     public List<Product> products;
+    public Product product;
 
+    private Long productId;
     private String newName;
     private int newPrice;
     private String newDescription;
@@ -43,6 +47,23 @@ public class ProductController {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+
+    public String deleteProduct(Long id) {
+        productService.deleteProduct(id);
+        addMessage("Product Deleted!");
+        return "redirect:/productlist.xhtml";
+    }
+
+    public Product getProduct(Long id) {
+        return product = productService.getProductById(id);
+    }
+
+    public String toUpdatePage(Long id) {
+        getProduct(id);
+        addMessage("update product" );
+        return "productupdate?faces-redirect=true";
+    }
+
 
     //getters en setters
     public String getNewName() {
@@ -76,6 +97,10 @@ public class ProductController {
     public void setNewStock(int newStock) {
         this.newStock = newStock;
     }
+
+    public Long getProductId() { return productId; }
+
+    public void setProductId(Long productId) { this.productId = productId; }
 
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
