@@ -44,16 +44,18 @@
                 <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form"/>
             </h:form>
 
-            <h4>Productlist</h4>
+            <h2>Productlist</h2>
             <h:form>
                 <p:repeat value="#{productController.products}" var="product">
                     <h:panelGrid columns="2" style="width:100%">
 
 
                         <p:outputPanel>
+                            <h4>#{product.name}</h4>
                             <h:panelGrid columns="2" cellpadding="5">
-                                <h:outputText value="Name:"/>
-                                <h:outputText value="#{product.name}"/>
+
+                                <h:outputText value="id:"/>
+                                <h:outputText value="#{product.id}"/>
 
                                 <h:outputText value="Price:"/>
                                 <h:outputText value="#{product.price}"/>
@@ -73,6 +75,9 @@
                                     <p:commandLink value="Update" id="updateProduct"
                                                    action="#{productController.toUpdatePage(product.id)}" ajax="false"/>
                                 </p:column>
+
+                                <hr/>
+                                <br/>
                             </h:panelGrid>
                         </p:outputPanel>
                     </h:panelGrid>

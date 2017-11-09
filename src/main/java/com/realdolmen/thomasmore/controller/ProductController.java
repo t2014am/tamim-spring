@@ -20,7 +20,7 @@ public class ProductController {
     private ProductService productService;
 
     public List<Product> products;
-    public Product product;
+    private Product product;
 
     private Long productId;
     private String newName;
@@ -54,12 +54,8 @@ public class ProductController {
         return "redirect:/productlist.xhtml";
     }
 
-    public Product getProduct(Long id) {
-        return product = productService.getProductById(id);
-    }
-
     public String toUpdatePage(Long id) {
-        getProduct(id);
+        productService.getProductById(id);
         addMessage("update product" );
         return "productupdate?faces-redirect=true";
     }

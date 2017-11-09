@@ -17,9 +17,11 @@
             <h:form>
                 <p:growl id="growl"/>
 
+                <h:outputText value="Name:"/>
+                <h:outputText value="#{productController.product.name)}"/>
                 <!--Inputveld voor naam van product-->
                 <p>Name:</p>
-                <p:inputText id="name" value="#{productController.product.name}"
+                <p:inputText id="name" value="#{product.name}"
                              required="true"
                              requiredMessage="Name is required">
                 </p:inputText> <br/>
@@ -43,6 +45,8 @@
                 <br/>
                 <p:commandButton value="Submit" action="#{productController.updateProduct()}" update="@form"/>
             </h:form>
+
+
 
 
         </ui:define>
