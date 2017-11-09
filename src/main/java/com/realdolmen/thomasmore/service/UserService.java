@@ -48,6 +48,7 @@ public class UserService {
         userRepository.delete(id);
 
     }
+
     public void updateUser(Long id, String firstName, String lastName, String email, String tel, String password, Date dob) {
         User user = new User();
         user.setId(id);
@@ -59,6 +60,14 @@ public class UserService {
         user.setDob(dob);
         userRepository.save(user);
 
+    }
+
+    public User authenticateUser(String username,String password){
+        return userRepository.findByEmail(username);
+//        if (username == "username" && password == "password"){
+//            return System.out.println("hakuna matata");
+//        }
+//        return System.out.println("null");
     }
 
 }
