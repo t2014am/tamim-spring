@@ -17,7 +17,7 @@
     <!-- Own css -->
     <link href="css/style.css" rel="stylesheet"/>
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.css" rel="stylesheet"/>
+    <!--<link href="css/mdb.css" rel="stylesheet"/>-->
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,‌​100italic,300,300ita‌​lic,400italic,500,50‌​0italic,700,700itali‌​c,900italic,900'
           rel='stylesheet' type='text/css'/>
@@ -30,12 +30,41 @@
 
     <ui:composition template="/layout.xhtml">
         <ui:define name="content">
-            <h3>Startup page content! Maybe something people wanna see when they open the website! </h3>
-            <br/>
 
+                <div id="products">
+
+                    <input class="search" placeholder="Search Products..."/>
+                    <button class="sort btn btn-dark" data-sort="price">
+                        Sort by price
+                    </button>
+                <div class="row list">
+
+                <p:repeat value="#{productController.products}" var="product">
+
+
+                        <div class="col-4">
+                            <div class="card">
+                                <img class="card-img-top" src="http://via.placeholder.com/350x150"
+                                     alt="Card image cap"/>
+                                <div class="card-block">
+                                    <h4 class="card-title name">#{product.name}</h4>
+                                    <div class="card-text">
+                                        <p>Stock: <span class="stock">#{product.stock}</span></p>
+                                        <p>Categorie: <span class="category">Alcohol</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-outline-info">Add To Cart</button>
+                                <h4 class="float-right "><b>€ <span class="price">#{product.price}</span></b></h4>
+                            </div>
+                        </div>
+                    </p:repeat>
+                </div>
+                </div>
         </ui:define>
-    </ui:composition>
 
+    </ui:composition>
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
@@ -51,6 +80,17 @@
     <script type="text/javascript" src="js/mdb.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!--List.JS-->
+    <script src="js/list.js"></script>
+    <script>
+        var options = {
+            valueNames: ['name', 'price']
+//        page: 3,
+//        pagination: true
+        };
+
+        var productList = new List('products', options);
+    </script>
 
 </h:body>
 </html>
