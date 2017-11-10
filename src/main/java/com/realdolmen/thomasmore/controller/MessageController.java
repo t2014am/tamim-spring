@@ -10,6 +10,7 @@ import com.realdolmen.thomasmore.service.UserService;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by JUZAU33 on 28/09/2017.
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class MessageController {
 
     //Autowired kunnen we niet gebruiken in JSF, daarom gebruiken we hier dit om een spring bean te injecteren.
@@ -41,8 +42,14 @@ public class MessageController {
     }
 
 
-    public void createSupportTicket() {
+    public void createMessage() {
         messageService.createMessage(newSupportTicket, newSupportText, newBySupportUser);
+        addMessage("Bericht verzonden!");
+        clearForm();
+    }
+
+    public void createMessage(SupportTicket supportTicket) {
+        messageService.createMessage(supportTicket, newSupportText, false);
         addMessage("Bericht verzonden!");
         clearForm();
     }

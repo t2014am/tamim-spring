@@ -31,6 +31,9 @@ public class SupportTicketService {
     public List<SupportTicket> findAllSupportTickets() {
         return supportTicketRepository.findAll();
     }
+    public List<SupportTicket> findAllSupportTicketsByCustomer(User customer) {
+        return supportTicketRepository.findAllByCustomer(customer);
+    }
     public SupportTicket findSupportTicketById(long id) {return supportTicketRepository.findById(id);}
 
 }

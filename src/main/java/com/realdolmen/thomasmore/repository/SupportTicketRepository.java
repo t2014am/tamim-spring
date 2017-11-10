@@ -16,9 +16,10 @@ public interface SupportTicketRepository extends CrudRepository<SupportTicket, L
     /**
      * Beschrijf in de method name wat je wilt dat spring uit de database haalt, zo simpel is het!
      */
-    SupportTicket findByCustomer(User customer);
+    List<SupportTicket> findAllByCustomer(User customer);
     SupportTicket findBySupport(User support);
     List<SupportTicket> findAll();
+    //List<SupportTicket> findAllByUser(User user);
     SupportTicket findById(long id);
 
 }

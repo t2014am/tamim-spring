@@ -32,32 +32,30 @@
         </p:menubar>
     </h:form>
 
-    <h2>Create a support ticket</h2>
-
+    <h2>Support ticket</h2>
+    <h3>Subject: <h:outputText value="#{supportTicketController.supportTicket.subject}"/></h3>
     <h:form>
         <p:growl id="growl"/>
-        <p:inputText id="subject" value="#{supportTicketController.newSubject}"
-                     required="true"
-                     requiredMessage="Subject is required">
-        </p:inputText> <br/>
-        <p:watermark value="Subject" for="subject"/>
-
-        <!--<p:selectOneMenu id="customer" value="#{supportTicketController.newCustomer}" converter="omnifaces.SelectItemsConverter">
-            <f:selectItems  value="#{userController.getUsers()}"/>
-        </p:selectOneMenu>
-        <p:watermark value="Customer" for="customer"/>
-
-        <p:selectOneMenu id="support" value="#{supportTicketController.newSupport}" converter="omnifaces.SelectItemsConverter">
-            <f:selectItems  value="#{userController.getUsers()}"/>
-        </p:selectOneMenu>
-        <p:watermark value="Customer" for="customer"/>-->
+        <p:repeat value="#{messageController.getMessagesBySupportTicket(supportTicketController.supportTicket)}" var="message">
+            <h:panelGrid columns="2" style="width:100%">
+                <p:outputPanel>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="#{message.supportTicket.customer.firstName}: "/>
+                        <h:outputText value="#{message.supportText}"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </h:panelGrid>
+        </p:repeat>
 
         <br/>
-        <p:inputTextarea rows="5" cols="30" id="supportText" value="#{supportTicketController.messageToSend}"
+        <p:inputTextarea rows="5" cols="30" id="supportText" value="#{messageController.newSupportText}"
                      required="true"
                      requiredMessage="Message is required">
+
         </p:inputTextarea> <br/><br/>
-        <p:commandButton value="Submit" action="#{supportTicketController.createSupportTicket()}" update="@form"/>
+
+        <p:commandButton value="Submit" action="#{messageController.createMessage(supportTicketController.supportTicket)}" update="@form"/>
     </h:form>
+
 </h:body>
 </html>
