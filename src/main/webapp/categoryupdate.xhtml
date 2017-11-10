@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Category update</title>
+</h:head>
+<h:body>
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+
+            <h4>Update category</h4>
+            <h:form>
+                    <p:growl id="growl"/>
+
+                    <!--Inputveld voor naam van category-->
+                    <p>Name:</p>
+                    <p:inputText id="name" value="#{categoryController.category.name}"
+                                 required="true"
+                                 requiredMessage="Name is required">
+                    </p:inputText> <br/>
+                    <p:watermark value="Name" for="name"/>
+
+                    <!--Inputveld voor omschrijving van category-->
+                    <p>Description:</p>
+                    <p:inputText id="description" value="#{categoryController.category.description}"/><br/>
+                    <p:watermark value="Description" for="description"/>
+
+
+
+                    <br/>
+                    <p:commandButton value="Submit" action="#{categoryController.updateCategory(categoryController.category)}" update="@form"/>
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Categorylist</title>
+</h:head>
+<h:body>
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <h:commandButton type="submit" action="#{categoryController.toNewCategoryPage()}"
+                                 value="Add new category"/>
+            </h:form>
+
+            <h2>Categorylist</h2>
+
+            <h:form>
+                <p:repeat value="#{categoryController.categories}" var="category">
+                    <h:panelGrid columns="2" style="width:100%">
+
+
+                        <p:outputPanel>
+                            <h4>#{category.name}</h4>
+                            <h:panelGrid columns="2" cellpadding="5">
+
+                                <h:outputText value="id:"/>
+                                <h:outputText value="#{category.id}"/>
+
+                                <h:outputText value="Description:"/>
+                                <h:outputText value="#{category.description}"/>
+
+                                <p:column headerText="Delete category">
+                                    <p:commandLink value="Delete" id="deleteCategory"
+                                                   actionListener="#{categoryController.deleteCategory(category.id)}"
+                                                   ajax="false"/>
+                                </p:column>
+                                <p:column headerText="Update category">
+                                    <p:commandLink value="Update" id="updateCategory"
+                                                   action="#{categoryController.toUpdatePage(category.id)}" ajax="false"/>
+                                </p:column>
+
+                                <hr/>
+                                <br/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:repeat>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+</html>

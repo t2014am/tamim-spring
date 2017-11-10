@@ -44,10 +44,10 @@ public class ProductController {
         return "productnew?faces-redirect=true";
     }
 
-    public void createProduct() {
+    public String createProduct() {
         productService.createProduct(newName,newPrice,newDescription,newStock);
-        addMessage("Product toegevoegd!");
         clearForm();
+        return "productlist?faces-redirect=true";
     }
 
     private void clearForm() {
