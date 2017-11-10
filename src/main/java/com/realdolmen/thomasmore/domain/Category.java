@@ -15,6 +15,7 @@ public class Category implements Serializable {
     private String name;
     private String description;
 
+
     //getters en setters
     public Long getId() {
         return id;

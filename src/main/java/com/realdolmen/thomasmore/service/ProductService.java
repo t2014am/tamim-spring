@@ -12,12 +12,13 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void createProduct(String name, int price, String description, int stock) {
+    public void createProduct(String name, int price, String description, int stock, Long categoryId) {
         Product product = new Product();
         product.setName(name);
         product.setPrice(price);
         product.setDescription(description);
         product.setStock(stock);
+        product.setCategoryId(categoryId);
 
         productRepository.save(product);
     }
@@ -38,4 +39,12 @@ public class ProductService {
     public void updateProduct(Product product) {
         productRepository.save(product);
     }
+
+    public List<Product> findAllProductsOrderByNameAsc() {
+        return productRepository.findAllByOrderByNameAsc();
+    }
+
+    //public List<Product> findAllProductsOrderByNameDesc() {
+    //    return productRepository.findAllByNameOrderByNameDesc();
+    //}
 }

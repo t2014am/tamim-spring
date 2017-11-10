@@ -16,6 +16,7 @@ public class Product implements Serializable {
     private int price;
     private String description;
     private int stock;
+    private Long categoryId;
 
 
     //getters en setters
@@ -57,5 +58,13 @@ public class Product implements Serializable {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

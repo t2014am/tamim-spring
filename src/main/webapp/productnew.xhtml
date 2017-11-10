@@ -39,6 +39,12 @@
                 <p:inputText id="stock" value="#{productController.newStock}"/> <br/>
                 <p:watermark value="Stock" for="stock"/>
 
+                <p>Category:</p>
+                <h:selectOneMenu value="#{productController.newCategoryId}">
+                    <f:selectItems value="#{categoryController.categories}" var="category" itemValue="#{category.id}" itemLabel="#{category.name}"/>
+
+                </h:selectOneMenu>
+                <br/>
                 <br/>
                 <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form"/>
             </h:form>
