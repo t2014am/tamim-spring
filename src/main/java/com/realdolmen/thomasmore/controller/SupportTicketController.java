@@ -9,6 +9,7 @@ import com.realdolmen.thomasmore.service.UserService;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.Date;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by JUZAU33 on 28/09/2017.
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class SupportTicketController {
 
     //Autowired kunnen we niet gebruiken in JSF, daarom gebruiken we hier dit om een spring bean te injecteren.
@@ -36,10 +37,22 @@ public class SupportTicketController {
     private String newSubject;
     private String messageToSend;
 
+    private SupportTicket supportTicket;
 
     public List<SupportTicket> getSupportTickets() {
         return supportTicketService.findAllSupportTickets();
     }
+    public SupportTicket getSupportTicketById(long id) {
+        return supportTicketService.findSupportTicketById(id);
+    }
+
+    public List<SupportTicket> getSupportTicketsByCustomer() {
+        return supportTicketService.findAllSupportTicketsByCustomer(userService.findUserById((long)1));
+    }
+
+    /*public List<SupportTicket> getSupportTicketsBySupport() {
+        return supportTicketService.findAllSupportTicketsBySupport();
+    }*/
 
 
     /*public void createSupportTicket() {
@@ -59,6 +72,39 @@ public class SupportTicketController {
         addMessage("Bericht verstuurd!");
         clearForm();
     }
+
+    public SupportTicket getChosenTicket(Long id) {
+        return this.supportTicket = supportTicketService.findSupportTicketById(id);
+    }
+
+    public String toSupportTicketPage(long id) {
+        //setSupportTicket(supportTicketService.findSupportTicketById((long)1));
+        //getChosenTicket(id);
+        this.supportTicket = supportTicketService.findSupportTicketById(id);
+        if(this.supportTicket != null){
+            //do something
+            System.out.println("Going to support ticket number: " + this.supportTicket.getId());
+            System.out.println("supportticket details here: " + this.supportTicket.getSubject());
+            return "supportticket?faces-redirect=true";
+        } else {
+            System.out.println("Nullpointer");
+            //do something else
+            return "supportticketlist";
+        }
+    }
+
+    public String testValues(long id1, String subject1){
+        System.out.println("id: " + this.supportTicket.getId() + " subject: " + this.supportTicket.getSubject());
+        System.out.println("id: " + id1 + " subject: " + subject1);
+        return "supportticketlist?faces-redirect=true";
+    }
+
+
+    /*public String toSupportTicketPage(SupportTicket supportTicket) {
+        this.supportTicket = supportTicket;
+        System.out.println("supportticket details here: " + this.supportTicket.toString());
+        return "supportticket";
+    }*/
 
     private void clearForm() {
         newCustomer = null;
@@ -102,6 +148,16 @@ public class SupportTicketController {
     public void setMessageToSend(String messageToSend) {
         this.messageToSend = messageToSend;
     }
+
+    public SupportTicket getSupportTicket() {
+        return supportTicket;
+    }
+
+    public void setSupportTicket(SupportTicket supportTicket) {
+        this.supportTicket = supportTicket;
+    }
+
+
 
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
