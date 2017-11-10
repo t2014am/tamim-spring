@@ -6,6 +6,7 @@ import com.realdolmen.thomasmore.service.ProductService;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ProductController {
     //Autowired kunnen we niet gebruiken in JSF, daarom gebruiken we hier dit om een spring bean te injecteren.
     @ManagedProperty("#{productService}")
@@ -28,8 +29,19 @@ public class ProductController {
     private String newDescription;
     private int newStock;
 
+
     public List<Product> getProducts() {
         return products = productService.findAllProducts();
+    }
+    //meldingen tonen
+    private void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    //aanmaken product
+    public String toNewProductPage() {
+        return "productnew?faces-redirect=true";
     }
 
     public void createProduct() {
@@ -43,26 +55,28 @@ public class ProductController {
         newDescription = null;
     }
 
-    private void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
 
+    //deleten van product
     public String deleteProduct(Long id) {
         productService.deleteProduct(id);
         addMessage("Product Deleted!");
         return "redirect:/productlist.xhtml";
     }
 
-    public Product getProduct(Long id) {
-        return product = productService.getProductById(id);
-    }
 
+    //updaten van product
     public String toUpdatePage(Long id) {
-        getProduct(id);
-        addMessage("update product" );
+        product = productService.getProductById(id);
+        addMessage("update product" + product.getName());
         return "productupdate?faces-redirect=true";
     }
+
+    public String updateProduct(Product product) {
+        productService.updateProduct(product);
+        return "productlist?faces-redirect=true";
+    }
+
+
 
 
     //getters en setters
@@ -101,6 +115,14 @@ public class ProductController {
     public Long getProductId() { return productId; }
 
     public void setProductId(Long productId) { this.productId = productId; }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.

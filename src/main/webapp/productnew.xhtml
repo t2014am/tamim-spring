@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Productlist</title>
+</h:head>
+<h:body>
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+            <h4>Add product</h4>
+            <h:form>
+                <p:growl id="growl"/>
+
+                <!--Inputveld voor naam van product-->
+                <p>Name:</p>
+                <p:inputText id="name" value="#{productController.newName}"
+                             required="true"
+                             requiredMessage="Name is required">
+                </p:inputText> <br/>
+                <p:watermark value="Name" for="name"/>
+
+                <!--Inputveld voor prijs van product-->
+                <p>Price:</p>
+                <p:inputText id="price" value="#{productController.newPrice}"/> <br/>
+                <p:watermark value="Price" for="price"/>
+
+                <!--Inputveld voor omschrijving van product-->
+                <p>Description:</p>
+                <p:inputText id="description" value="#{productController.newDescription}"/><br/>
+                <p:watermark value="Description" for="description"/>
+
+                <!--Inputveld voor stock van product-->
+                <p>Stock:</p>
+                <p:inputText id="stock" value="#{productController.newStock}"/> <br/>
+                <p:watermark value="Stock" for="stock"/>
+
+                <br/>
+                <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+</html>
