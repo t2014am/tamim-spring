@@ -18,13 +18,16 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     public void createUser(String firstName, String lastName, String email, String tel, String password, Date dob) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
+//        user.setUsername(email);
         user.setTel(tel);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(password);
+//        user.setPassword(passwordEncoder.encode(password));
         user.setDob(dob);
 //        user.setGender(gender);
 
@@ -55,19 +58,12 @@ public class UserService {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
+//        user.setUsername(email);
         user.setTel(tel);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(password);
+//        user.setPassword(passwordEncoder.encode(password));
         user.setDob(dob);
         userRepository.save(user);
 
     }
-
-    public User authenticateUser(String username,String password){
-        return userRepository.findByEmail(username);
-//        if (username == "username" && password == "password"){
-//            return System.out.println("hakuna matata");
-//        }
-//        return System.out.println("null");
-    }
-
 }

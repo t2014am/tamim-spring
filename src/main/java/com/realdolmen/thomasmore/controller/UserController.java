@@ -2,6 +2,9 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.User;
 import com.realdolmen.thomasmore.service.UserService;
+import com.sun.faces.action.RequestMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.faces.application.FacesMessage;
@@ -45,7 +48,7 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Long id)  {
         userService.deleteUserById(id);
 //        addMessage("User Deleted!");
 //        return "redirect:/useroverview.xhtml";
