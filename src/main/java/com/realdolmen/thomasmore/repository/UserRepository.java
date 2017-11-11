@@ -1,6 +1,7 @@
 package com.realdolmen.thomasmore.repository;
 
 import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail(String email);
 
     List<User> findAll();
+
+    void save(Users user);
 
 //    User findById(Long id);
 //

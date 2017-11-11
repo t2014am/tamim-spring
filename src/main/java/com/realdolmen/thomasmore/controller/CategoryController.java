@@ -29,6 +29,8 @@ public class CategoryController {
         return categories = categoryService.findAllCategories();
     }
 
+    public Category getCategoryById(Long id) { return category = categoryService.getCategoryById(id); }
+
     //meldingen tonen
     private void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);

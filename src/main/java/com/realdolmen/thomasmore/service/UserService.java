@@ -18,13 +18,16 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     public void createUser(String firstName, String lastName, String email, String tel, String password, Date dob) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
+//        user.setUsername(email);
         user.setTel(tel);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(password);
+//        user.setPassword(passwordEncoder.encode(password));
         user.setDob(dob);
 //        user.setGender(gender);
 
@@ -48,17 +51,19 @@ public class UserService {
         userRepository.delete(id);
 
     }
+
     public void updateUser(Long id, String firstName, String lastName, String email, String tel, String password, Date dob) {
         User user = new User();
         user.setId(id);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
+//        user.setUsername(email);
         user.setTel(tel);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(password);
+//        user.setPassword(passwordEncoder.encode(password));
         user.setDob(dob);
         userRepository.save(user);
 
     }
-
 }

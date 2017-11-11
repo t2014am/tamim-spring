@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+    <script name="jquery/jquery.js" library="primefaces"></script>
 </h:head>
 <h:body>
 
@@ -69,6 +69,8 @@
                         <p:inputText value="#{userController.newUserDob}" id="dob" converterMessage="Invalid Date"
                                         pattern="dd-MM-yyyy" navigator="true" class="col-md-4" placeholder="Date of birth here (dd-MM-yyyy)"/>
                     </div>
+
+                    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 
                     <div>
                         <p:commandButton value="Submit" action="#{userController.createOrUpdateUser()}" update="@form"

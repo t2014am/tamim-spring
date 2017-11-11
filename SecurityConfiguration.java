@@ -24,22 +24,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/useroverview.xhtml")
-                .authenticated()
-                .anyRequest()
-                .permitAll()
+                    .authenticated()
+                    .anyRequest()
+                    .permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login.xhtml")
-                .loginProcessingUrl("/login.xhtml")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/index.xhtml")
-                .permitAll()
+                    .loginPage("/login.xhtml")
+                    .loginProcessingUrl("/login.xhtml")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/index.xhtml")
+                    .permitAll()
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/index.xhtml")
-                .permitAll();
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/index.xhtml")
+                    .permitAll();
     }
 
     @Autowired

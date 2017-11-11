@@ -21,6 +21,7 @@ public class ProductController {
     private ProductService productService;
 
     public List<Product> products;
+    public List<Product> productsOrderd;
     public Product product;
 
     private Long productId;
@@ -28,14 +29,19 @@ public class ProductController {
     private int newPrice;
     private String newDescription;
     private int newStock;
+    private Long newCategoryId;
 
 
     public List<Product> getProducts() {
-        return products = productService.findAllProducts();
+        if (products == null) {
+            products = productService.findAllProducts();
+        }
+        return products;
     }
+
     //meldingen tonen
     private void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
@@ -45,7 +51,7 @@ public class ProductController {
     }
 
     public String createProduct() {
-        productService.createProduct(newName,newPrice,newDescription,newStock);
+        productService.createProduct(newName, newPrice, newDescription, newStock, newCategoryId);
         clearForm();
         return "productlist?faces-redirect=true";
     }
@@ -77,6 +83,16 @@ public class ProductController {
     }
 
 
+    //sorteren van producten
+    public String orderByNameAsc() {
+        products = productService.findAllProductsOrderByNameAsc();
+        return "redirect:/productlist.xhtml";
+    }
+
+    //public  String orderByNameDesc() {
+    //    products = productService.findAllProductsOrderByNameDesc();
+    //    return "redirect:/productlist.xhtml";
+    //}
 
 
     //getters en setters
@@ -112,9 +128,13 @@ public class ProductController {
         this.newStock = newStock;
     }
 
-    public Long getProductId() { return productId; }
+    public Long getProductId() {
+        return productId;
+    }
 
-    public void setProductId(Long productId) { this.productId = productId; }
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
 
     public Product getProduct() {
         return product;
@@ -122,6 +142,15 @@ public class ProductController {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    //getters en setters voor categorie
+    public Long getNewCategoryId() {
+        return newCategoryId;
+    }
+
+    public void setNewCategoryId(Long newCategoryId) {
+        this.newCategoryId = newCategoryId;
     }
 
     /**
