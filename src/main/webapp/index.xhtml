@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <script type="jquery/jquery.js" src="primefaces"></script>
-
+    <script>alert('me does work');</script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -33,13 +33,19 @@
 
                 <div id="products">
 
-                    <input class="search" placeholder="Search Products..."/>
+                    <input onkeyup="productList.search(this.value,['name'])"  id="name-search-field" placeholder="Search Products..."/>
                     <button class="sort btn btn-dark" data-sort="price">
                         Sort by price
                     </button>
+                    <select class="search" onchange="filterCategory(this.value)">
+                        <option value="ALL">Alle</option>
+                        <p:repeat id="categorieen" value="#{categoryController.getCategories()}" var="category">
+                            <option value="#{category.name}">#{category.name}</option>
+                        </p:repeat>
+                    </select>
                 <div class="row list">
 
-                <p:repeat value="#{productController.products}" var="product">
+                <p:repeat value="#{productController.getProducts()}" var="product">
 
 
                         <div class="col-4">
@@ -50,7 +56,7 @@
                                     <h4 class="card-title name">#{product.name}</h4>
                                     <div class="card-text">
                                         <p>Stock: <span class="stock">#{product.stock}</span></p>
-                                        <p>Categorie: <span class="category">Alcohol</span></p>
+                                        <p>Categorie: <span class="category">#{categoryController.getCategoryById(product.categoryId).name}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -62,6 +68,31 @@
                     </p:repeat>
                 </div>
                 </div>
+            <script src="js/list.js"></script>
+            <script>
+                var options = {
+                    valueNames: ['name', 'price','category']
+                };
+                var productList = new List('products', options);
+                function filterCategory(category)
+                {
+                    if(category === "ALL")
+                    {
+                        productList.filter();
+                    }
+                    else{
+                    productList.filter(function(product){
+                        if(product.values().category === category)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    })}
+                }
+            </script>
         </ui:define>
 
     </ui:composition>
@@ -81,16 +112,10 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!--List.JS-->
-    <script src="js/list.js"></script>
-    <script>
-        var options = {
-            valueNames: ['name', 'price']
-//        page: 3,
-//        pagination: true
-        };
 
-        var productList = new List('products', options);
-    </script>
+
+
+
 
 </h:body>
 </html>
