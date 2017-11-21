@@ -21,6 +21,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     List<User> findAll();
 
+    User findUserById(Long id);
+
 //    User findById(Long id);
 //
 //    User deleteById(Long id);
