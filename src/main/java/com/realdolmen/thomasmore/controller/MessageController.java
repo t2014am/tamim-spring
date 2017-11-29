@@ -2,16 +2,14 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.Message;
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.service.MessageService;
 import com.realdolmen.thomasmore.service.SupportTicketService;
-import com.realdolmen.thomasmore.service.UserService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.List;
 

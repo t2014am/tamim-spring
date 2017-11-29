@@ -2,9 +2,7 @@ package com.realdolmen.thomasmore.service;
 
 import com.realdolmen.thomasmore.domain.Message;
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.User;
 import com.realdolmen.thomasmore.repository.MessageRepository;
-import com.realdolmen.thomasmore.repository.SupportTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

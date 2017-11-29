@@ -18,24 +18,24 @@
                 <h2>Registration Form</h2>
                 <h:form>
                     <p:growl id="growl"/>
-                    <p:inputText type="hidden" id="id" value="#{userController.userId}"/><br/>
+                    <p:inputText type="hidden" id="id" value="#{usersController.userId}"/><br/>
 
                     <div class="row">
                         <label for="firstName" class="col-md-4">First name: </label>
-                        <p:inputText id="firstName" value="#{userController.newUserFirstName}" required="true"
+                        <p:inputText id="firstName" value="#{usersController.newUserFirstName}" required="true"
                                      requiredMessage="First Name is required" placeholder="First name"
                                      class="col-md-4"/>
                     </div>
 
                     <div class="row">
                         <label for="lastName" class="col-md-4">Last name: </label>
-                        <p:inputText id="lastName" value="#{userController.newUserLastName}" placeholder="Last name"
+                        <p:inputText id="lastName" value="#{usersController.newUserLastName}" placeholder="Last name"
                                      class="col-md-4"/>
                     </div>
 
                     <div class="row">
                         <label for="email" class="col-md-4">Email: </label>
-                        <p:inputText id="email" value="#{userController.newUserEmail}" validatorMessage="Invalid Email"
+                        <p:inputText id="email" value="#{usersController.newUserEmail}" validatorMessage="Invalid Email"
                                      placeholder="Email" class="col-md-4">
                             <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
                         </p:inputText>
@@ -43,13 +43,13 @@
 
                     <div class="row">
                         <label for="tel" class="col-md-4">Telephone number: </label>
-                        <p:inputText id="tel" value="#{userController.newUserTel}" placeholder="Telephone number"
+                        <p:inputText id="tel" value="#{usersController.newUserTel}" placeholder="Telephone number"
                                      class="col-md-4"/>
                     </div>
 
                     <div class="row">
                         <label for="password" class="col-md-4">Password: </label>
-                        <p:password id="password" value="#{userController.newUserPassword}" required="true"
+                        <p:password id="password" value="#{usersController.newUserPassword}" required="true"
                                     requiredMessage="Password is required" match="passwordCheck"
                                     validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match"
                                     placeholder="Password" class="col-md-4">
@@ -66,14 +66,14 @@
 
                     <div class="row">
                         <label for="dob" class="col-md-4">Date of birth: </label>
-                        <p:inputText value="#{userController.newUserDob}" id="dob" converterMessage="Invalid Date"
-                                        pattern="dd-MM-yyyy" navigator="true" class="col-md-4" placeholder="Date of birth here (dd-MM-yyyy)"/>
+                        <p:inputText value="#{usersController.newUserDob}" id="dob" converterMessage="Invalid Date"
+                                     pattern="dd-MM-yyyy" navigator="true" class="col-md-4" placeholder="Date of birth here (dd-MM-yyyy)"/>
                     </div>
 
                     <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 
                     <div>
-                        <p:commandButton value="Submit" action="#{userController.createOrUpdateUser()}" update="@form"
+                        <p:commandButton value="Submit" action="#{usersController.createUser()}" update="@form"
                                          class="col-md-offset-4"/>
                     </div>
 
