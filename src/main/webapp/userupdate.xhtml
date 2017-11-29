@@ -17,7 +17,7 @@
             <!-- VIEW THE USER DATA!!! -->
             <h2>VIEW THE USER DATA!!! </h2>
             <h:form>
-                <p:dataTable var="user" value="#{userController.getUserById(userController.user.id)}">
+                <p:dataTable var="user" value="#{usersController.getUserById(usersController.user.id)}">
                     <p:column headerText="First name">
                         <h:outputText value="#{user.getFirstName()}"/>
                     </p:column>
@@ -40,7 +40,7 @@
 
                     <p:column headerText="Update User">
                         <p:commandButton value="Update" id="updateUser2"
-                                         action="#{userController.updateUser(user)}" ajax="true"/>
+                                         action="#{usersController.updateUser(user)}" ajax="true"/>
                     </p:column>
 
                     <!--<p:link outcome="userregistration" value="Bookmark">-->
@@ -49,7 +49,7 @@
 
                     <p:column headerText="Delete User">
                         <p:commandButton value="Delete" id="deleteUser"
-                                         actionListener="#{userController.deleteUserById(user.id)}" update="@form"/>
+                                         actionListener="#{usersController.deleteUserById(user.id)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
@@ -59,25 +59,25 @@
             <h2>Registration Form</h2>
             <h:form>
                 <p:growl id="growl"/>
-                <p:inputText id="id" value="#{userController.user.id}"/><br/>
+                <p:inputText id="id" value="#{usersController.user.id}"/><br/>
 
 
                 <div>
                     <label for="firstName" class="col-md-4">First name: </label>
-                    <p:inputText id="firstName" value="#{userController.user.firstName}" required="true"
+                    <p:inputText id="firstName" value="#{usersController.user.firstName}" required="true"
                                  requiredMessage="First Name is required" placeholder="First name"
                                  class="col-md-4"/>
                 </div>
 
                 <div>
                     <label for="lastName" class="col-md-4">Last name: </label>
-                    <p:inputText id="lastName" value="#{userController.user.lastName}" placeholder="Last name"
+                    <p:inputText id="lastName" value="#{usersController.user.lastName}" placeholder="Last name"
                                  class="col-md-4"/>
                 </div>
 
                 <div>
                     <label for="email" class="col-md-4">Email: </label>
-                    <p:inputText id="email" value="#{userController.user.email}" validatorMessage="Invalid Email"
+                    <p:inputText id="email" value="#{usersController.user.email}" validatorMessage="Invalid Email"
                                  placeholder="Email" class="col-md-4">
                         <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
                     </p:inputText>
@@ -85,13 +85,13 @@
 
                 <div>
                     <label for="tel" class="col-md-4">Telephone number: </label>
-                    <p:inputText id="tel" value="#{userController.user.tel}" placeholder="Telephone number"
+                    <p:inputText id="tel" value="#{usersController.user.tel}" placeholder="Telephone number"
                                  class="col-md-4"/>
                 </div>
 
                 <div>
                     <label for="password" class="col-md-4">Password: </label>
-                    <p:password id="password" value="#{userController.user.password}"
+                    <p:password id="password" value="#{usersController.user.password}"
                                 required="true"
                                 requiredMessage="Password is required"
                                 match="passwordCheck"
@@ -110,7 +110,7 @@
                 <div>
                     <label for="dob" class="col-md-4">Date of birth: </label>
                     <div class="col-md-4">
-                        <p:calendar value="#{userController.user.dob}"
+                        <p:calendar value="#{usersController.user.dob}"
                                     id="dob"
                                     converterMessage="Invalid Date"
                                     pattern="dd-MM-yyyy"
@@ -120,7 +120,7 @@
                 </div>
 
                 <div>
-                    <p:commandButton value="Submit" action="#{userController.createOrUpdateUser()}" update="@form"
+                    <p:commandButton value="Submit" action="#{usersController.createOrUpdateUser()}" update="@form"
                                      class="col-md-offset-4"/>
                 </div>
 

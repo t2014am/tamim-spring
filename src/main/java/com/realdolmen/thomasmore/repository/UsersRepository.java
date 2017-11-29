@@ -1,6 +1,6 @@
 package com.realdolmen.thomasmore.repository;
 
-import com.realdolmen.thomasmore.domain.User;
+//import com.realdolmen.thomasmore.domain.User;
 import com.realdolmen.thomasmore.domain.Users;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -11,20 +11,23 @@ import java.util.List;
  * Een interface die CrudRepository extend, we geven het type van de entity mee en de primary key. (Employee en Long)
  */
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UsersRepository extends CrudRepository<Users, Long> {
 
     /**
      * Beschrijf in de method name wat je wilt dat spring uit de database haalt, zo simpel is het!
      */
-    User findByFirstNameAndLastName(String firstName, String lastName);
 
-    User findByEmail(String email);
 
-    List<User> findAll();
+    List<Users> findAll();
 
-    void save(Users user);
 
-//    User findById(Long id);
+    //    Users findByFirstNameAndLastName(String firstName, String lastName);
 //
-//    User deleteById(Long id);
+    Users findByEmail(String email);
+
+//    Users save(Users user);
+
+//    Users findById(Long id);
+//
+//    Users deleteById(Long id);
 }

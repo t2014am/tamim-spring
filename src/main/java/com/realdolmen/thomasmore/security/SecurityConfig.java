@@ -73,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fonts/**")
                 .antMatchers("/public/**")
                 .antMatchers("/javax.faces.resource/**")
+                .antMatchers("/**")
         ;
     }
 }

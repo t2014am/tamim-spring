@@ -14,7 +14,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private User user;
+    private Users user;
 
 
     public Long getId() {
@@ -27,11 +27,11 @@ public class Order implements Serializable {
 
 
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 }

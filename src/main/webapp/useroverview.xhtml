@@ -12,7 +12,7 @@
     <ui:composition template="/layout.xhtml">
         <ui:define name="content">
             <h:form>
-                <p:dataTable var="user" value="#{userController.getUsers()}">
+                <p:dataTable var="user" value="#{usersController.getUsers()}">
                     <p:column headerText="First name">
                         <h:outputText value="#{user.firstName}"/>
                     </p:column>
@@ -35,11 +35,11 @@
 
                     <p:column headerText="Update User">
                         <p:commandButton value="Update" id="updateUser"
-                                         action="#{userController.getUserById(user.id)}" ajax="false"/>
+                                         action="#{usersController.getUserById(user.id)}" ajax="false"/>
                     </p:column>
                     <p:column headerText="Update User">
                         <p:commandButton value="Update2" id="updateUser2"
-                                         action="#{userController.updateUser(user)}" ajax="true"/>
+                                         action="#{usersController.updateUser(user)}" ajax="true"/>
                     </p:column>
 
                     <p:link outcome="userregistration" value="Bookmark">
@@ -48,7 +48,7 @@
 
                     <p:column headerText="Delete User">
                         <p:commandButton value="Delete" id="deleteUser"
-                                         actionListener="#{userController.deleteUserById(user.id)}" update="@form"/>
+                                         actionListener="#{usersController.deleteUserById(user.id)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
