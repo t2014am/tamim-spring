@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 //                .antMatchers("/css/**").permitAll().antMatchers("/js/**").permitAll().antMatchers("/images/**").permitAll().antMatchers("/fonts/**").permitAll().antMatchers("/font/**").permitAll()
                 .antMatchers("/login.xhtml").permitAll()
+                .antMatchers("/index.xhtml").permitAll()
                 .antMatchers("/userregistration.xhtml").permitAll()
                 .antMatchers("/createOrUpdateUser").permitAll()
                 .antMatchers("/useroverview.xhtml").hasRole("ADMIN")
@@ -73,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fonts/**")
                 .antMatchers("/public/**")
                 .antMatchers("/javax.faces.resource/**")
-                .antMatchers("/**")
+//                .antMatchers("/**")
         ;
     }
 }

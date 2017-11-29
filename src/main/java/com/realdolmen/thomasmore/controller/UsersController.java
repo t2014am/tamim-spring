@@ -26,11 +26,11 @@ public class UsersController {
     private UsersService userService;
 
     private Long userId = new Long(0);
-    private String newUserFirstName = "tamim";
-    private String newUserLastName = "asefi";
-    private String newUserEmail = "asdf@fff.com";
-    private String newUserTel = "tel";
-    private String newUserPassword = "asdff";
+    private String newUserFirstName;
+    private String newUserLastName;
+    private String newUserEmail;
+    private String newUserTel;
+    private String newUserPassword;
     private Date newUserDob;
     private Date newUserGender;
 
