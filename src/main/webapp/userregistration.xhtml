@@ -70,12 +70,13 @@
                                      pattern="dd-MM-yyyy" navigator="true" class="col-md-4" placeholder="Date of birth here (dd-MM-yyyy)"/>
                     </div>
 
-                    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 
                     <div>
                         <p:commandButton value="Submit" action="#{usersController.createUser()}" update="@form"
-                                         class="col-md-offset-4"/>
+                        class="col-md-offset-4"/>
                     </div>
+
+                    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 
                 </h:form>
             </div>

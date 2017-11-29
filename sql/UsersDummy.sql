@@ -15,13 +15,35 @@ INSERT INTO `users` (`dob`,`email`, `username`,`firstName`,`gender`,`lastName`,`
 INSERT INTO `users` (`dob`,`email`, `username`,`firstName`,`gender`,`lastName`,`password`,`tel`, `enabled`) VALUES ('2017-10-01 00:00:00','pieterjan@dergent.com','pieterjan@dergent.com','Pieter-jan',NULL,'Dergent','$2a$10$rbYWeXrP9oeecp2J051dReKQTFu2UD8v79X6IwHhet/ei3.AFSRFu','telepoooon', b'1');
 
 /* CREATE tamim tamim as admin! UNENCRYPTED PASSWORD*/
+/*
 INSERT INTO `dbjavaadv`.`users` (`enabled`, `firstName`, `lastName`, `password`, `tel`, `username`) VALUES (b'1', 'tamim', 'tamim', 'tamim', 't', 'tamim');
 INSERT INTO `dbjavaadv`.`authorities` (`authority`, `username`) VALUES ('ROLE_ADMIN', 'tamim');
+*/
+
+/* CREATE tamim tamim as admin! ENCRYPTED PASSWORD!
+*/
+INSERT INTO `dbjavaadv`.`users` (`enabled`, `firstName`, `lastName`, `password`, `tel`, `username`) VALUES (b'1', 'tamim', 'tamim', '$2a$10$POI3LyPoy7vOivCm1tE/iuCDfXiAF2ERJvGrG5Pax2yZsrs7b/QAi', 't', 'tamim');
+INSERT INTO `dbjavaadv`.`authorities` (`authority`, `username`) VALUES ('ROLE_ADMIN', 'tamim');
+
 
 /* CREATE user password as user! UNENCRYPTED PASSWORD*/
+/*
 INSERT INTO `dbjavaadv`.`users` (`enabled`, `firstName`, `lastName`, `password`, `tel`, `username`) VALUES (b'1', 'tamim', 'tamim', 'password', 't', 'user');
 INSERT INTO `dbjavaadv`.`authorities` (`authority`, `username`) VALUES ('ROLE_USER', 'user');
+*/
+
+
+/* CREATE user password as user! ENCRYPTED PASSWORD*/
+INSERT INTO `dbjavaadv`.`users` (`enabled`, `firstName`, `lastName`, `password`, `tel`, `username`) VALUES (b'1', 'tamim', 'tamim', '$2a$10$49wIAR/kOiIszWbxhDauoeUXlA4ypg4Uba0HKmVaY0DkfV71W0M1.', 't', 'user');
+INSERT INTO `dbjavaadv`.`authorities` (`authority`, `username`) VALUES ('ROLE_USER', 'user');
+
 
 /* CREATE admin password as admin! UNENCRYPTED PASSWORD*/
+/*
 INSERT INTO `dbjavaadv`.`users` (`enabled`, `firstName`, `lastName`, `password`, `tel`, `username`) VALUES (b'1', 'tamim', 'tamim', 'password', 't', 'admin');
+INSERT INTO `dbjavaadv`.`authorities` (`authority`, `username`) VALUES ('ROLE_USER', 'admin');
+*/
+
+/* CREATE admin password as admin! ENCRYPTED PASSWORD*/
+INSERT INTO `dbjavaadv`.`users` (`enabled`, `firstName`, `lastName`, `password`, `tel`, `username`) VALUES (b'1', 'tamim', 'tamim', '$2a$10$49wIAR/kOiIszWbxhDauoeUXlA4ypg4Uba0HKmVaY0DkfV71W0M1.', 't', 'admin');
 INSERT INTO `dbjavaadv`.`authorities` (`authority`, `username`) VALUES ('ROLE_USER', 'admin');

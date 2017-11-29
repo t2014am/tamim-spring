@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-//                .passwordEncoder(passwordEncoder)
+                .passwordEncoder(passwordEncoder)
 
         ;
     }
@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login.xhtml").permitAll()
                 .antMatchers("/index.xhtml").permitAll()
                 .antMatchers("/userregistration.xhtml").permitAll()
+                .antMatchers("/userupdate.xhtml").permitAll()
                 .antMatchers("/createOrUpdateUser").permitAll()
                 .antMatchers("/useroverview.xhtml").hasRole("ADMIN")
                 .anyRequest().authenticated()

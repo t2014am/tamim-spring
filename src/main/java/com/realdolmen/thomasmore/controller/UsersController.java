@@ -62,6 +62,10 @@ public class UsersController {
         this.user = user;
         System.out.println("users details here: " + this.user.getFirstName() + ' ' + user.getFirstName());
         System.out.println(user.getLastName());
+
+        userService.updateUser(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getTel(), user.getPassword(), user.getDob());
+        addMessage("User updated!");
+
         return "userupdate";
     }
 

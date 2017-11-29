@@ -34,8 +34,8 @@ public class UsersService {
         user.setUsername(email);
 //        user.setUsername(username);
         user.setTel(tel);
-        user.setPassword(password);
-//        user.setPassword(passwordEncoder.encode(password));
+//        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         user.setDob(dob);
         user.setEnabled(enabled);
 //        user.setGender(gender);
@@ -73,8 +73,8 @@ public class UsersService {
         user.setEmail(email);
 //        user.setUsername(email);
         user.setTel(tel);
-        user.setPassword(password);
-//        user.setPassword(passwordEncoder.encode(password));
+//        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         user.setDob(dob);
         userRepository.save(user);
 
