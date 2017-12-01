@@ -22,12 +22,13 @@
                                  value="Order by name A - Z"/>
                 <h:commandButton type="submit" action="#{productController.orderByNameDesc()}"
                                  value="Order by name Z - A"/>
+
             </h:form>
 
             <h2>Productlist</h2>
 
             <h:form>
-                <p:repeat id="producten" value="#{productController.products}" var="product">
+                <p:repeat id="producten" value="#{productController.getProducts()}" var="product">
 
                     <h:panelGrid columns="2" style="width:100%">
 

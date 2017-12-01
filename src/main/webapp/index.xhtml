@@ -50,11 +50,12 @@
 
                         <div class="col-4">
                             <div class="card">
-                                <img class="card-img-top" src="http://via.placeholder.com/350x150"
+                                <img class="card-img-top" src="images/#{product.image}"
                                      alt="Card image cap"/>
                                 <div class="card-block">
                                     <h4 class="card-title name">#{product.name}</h4>
                                     <div class="card-text">
+                                        <p>#{product.description}</p>
                                         <p>Stock: <span class="stock">#{product.stock}</span></p>
                                         <p>Categorie: <span class="category">#{categoryController.getCategoryById(product.categoryId).name}</span></p>
                                     </div>
