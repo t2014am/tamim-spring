@@ -19,10 +19,10 @@ public class SupportTicket implements Serializable {
     //private int customerId;
 
     @ManyToOne
-    private User customer;
+    private Users customer;
     //private int supportId;
     @ManyToOne
-    private User support;
+    private Users support;
 
     private String subject;
 
@@ -50,19 +50,19 @@ public class SupportTicket implements Serializable {
         this.supportId = supportId;
     }*/
 
-    public User getCustomer() {
+    public Users getCustomer() {
         return customer;
     }
 
-    public void setCustomer(User customer) {
+    public void setCustomer(Users customer) {
         this.customer = customer;
     }
 
-    public User getSupport() {
+    public Users getSupport() {
         return support;
     }
 
-    public void setSupport(User support) {
+    public void setSupport(Users support) {
         this.support = support;
     }
 

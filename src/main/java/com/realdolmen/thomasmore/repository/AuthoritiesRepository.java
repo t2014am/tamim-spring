@@ -1,27 +1,33 @@
 package com.realdolmen.thomasmore.repository;
 
-import com.realdolmen.thomasmore.domain.Message;
-import com.realdolmen.thomasmore.domain.SupportTicket;
+//import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Authorities;
 import com.realdolmen.thomasmore.domain.Users;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * Een interface die CrudRepository extend, we geven het type van de entity mee en de primary key. (Employee en Long)
  */
 @Repository
-public interface MessageRepository extends CrudRepository<Message, Long> {
+public interface AuthoritiesRepository extends CrudRepository<Users, Long> {
+    void save(Authorities auth);
 
     /**
      * Beschrijf in de method name wat je wilt dat spring uit de database haalt, zo simpel is het!
      */
-    List<Message> findAllBySupportTicket(SupportTicket supportTicket);
 
-    List<Message> findAll();
 
-//    User findById(Long id);
+//    List<Authorities> findAll();
+
+
+//    Users findByFirstNameAndLastName(String firstName, String lastName);
 //
-//    User deleteById(Long id);
+//    Users findByEmail(String email);
+
+//    Users save(Users user);
+
+//    Users findById(Long id);
+//
+//    Users deleteById(Long id);
 }

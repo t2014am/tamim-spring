@@ -1,18 +1,16 @@
 package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.service.MessageService;
 import com.realdolmen.thomasmore.service.SupportTicketService;
-import com.realdolmen.thomasmore.service.UserService;
+import com.realdolmen.thomasmore.service.UsersService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,13 +25,13 @@ public class SupportTicketController {
     private SupportTicketService supportTicketService;
 
     @ManagedProperty("#{userService}")
-    private UserService userService;
+    private UsersService usersService;
 
     @ManagedProperty("#{messageService}")
     private MessageService messageService;
 
-    private User newCustomer;
-    private User newSupport;
+    private Users newCustomer;
+    private Users newSupport;
     private String newSubject;
     private String messageToSend;
 
@@ -47,7 +45,7 @@ public class SupportTicketController {
     }
 
     public List<SupportTicket> getSupportTicketsByCustomer() {
-        return supportTicketService.findAllSupportTicketsByCustomer(userService.findUserById((long)1));
+        return supportTicketService.findAllSupportTicketsByCustomer(usersService.findUserById((long)1));
     }
 
     /*public List<SupportTicket> getSupportTicketsBySupport() {
@@ -64,8 +62,8 @@ public class SupportTicketController {
     }*/
 
     public void createSupportTicket() {
-        this.newCustomer = userService.findUserByEmail("dries@donckers.com");
-        this.newSupport = userService.findUserByEmail("dries@donckers.com");
+        this.newCustomer = usersService.findUserByEmail("dries@donckers.com");
+        this.newSupport = usersService.findUserByEmail("dries@donckers.com");
         SupportTicket addedTicket = supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
         addMessage("Support ticket toegevoegd!");
         messageService.createMessage(addedTicket, messageToSend, false);
@@ -117,19 +115,19 @@ public class SupportTicketController {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public User getNewCustomer() {
+    public Users getNewCustomer() {
         return newCustomer;
     }
 
-    public void setNewCustomer(User newCustomer) {
+    public void setNewCustomer(Users newCustomer) {
         this.newCustomer = newCustomer;
     }
 
-    public User getNewSupport() {
+    public Users getNewSupport() {
         return newSupport;
     }
 
-    public void setNewSupport(User newSupport) {
+    public void setNewSupport(Users newSupport) {
         this.newSupport = newSupport;
     }
 
@@ -166,8 +164,8 @@ public class SupportTicketController {
         this.supportTicketService = supportTicketService;
     }
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUsersService(UsersService usersService) {
+        this.usersService = usersService;
     }
 
     public void setMessageService(MessageService messageService) {
