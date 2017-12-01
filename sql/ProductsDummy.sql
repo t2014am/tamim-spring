@@ -1,14 +1,11 @@
 /*
--- Query: SELECT * FROM dbjavaadv.product
+-- Query: SELECT * FROM dbjavaadv.Product
 LIMIT 0, 1000
 
--- Date: 2017-10-27
-
-PASSWORDS: asdff    OR    fdsaa   OR asdfg
+-- Date: 2017-11-16 15:26
 */
-INSERT INTO `category` (`name`,`description`) VALUES ('frisdrank', 'verfrissende suikerdrank');
-INSERT INTO `category` (`name`,`description`) VALUES ('koffie', 'warme drank');
-INSERT INTO `product` (`name`,`price`,`description`,`stock`) VALUES ('fanta','13','24 blikje','5');
-INSERT INTO `product` (`name`,`price`,`description`,`stock`) VALUES ('sprite','13','24 blikje','5');
-INSERT INTO `product` (`name`,`price`,`description`,`stock`) VALUES ('cherry cola','15','24 blikje','5');
-INSERT INTO `product` (`name`,`price`,`description`,`stock`) VALUES ('schweppes','16','24 blikje','5');
+INSERT INTO `Product` (`id`,`categoryId`,`description`,`image`,`name`,`price`,`stock`) VALUES (1,1,'24 blikje','fanta.png','fanta',13,5);
+INSERT INTO `Product` (`id`,`categoryId`,`description`,`image`,`name`,`price`,`stock`) VALUES (2,1,'24 blikje','sprite.png','sprite',13,5);
+INSERT INTO `Product` (`id`,`categoryId`,`description`,`image`,`name`,`price`,`stock`) VALUES (3,1,'24 blikje','cherry.png','cherry cola',15,5);
+INSERT INTO `Product` (`id`,`categoryId`,`description`,`image`,`name`,`price`,`stock`) VALUES (4,1,'24 blikje','schweppes.png','schweppes',16,5);
+INSERT INTO `Product` (`id`,`categoryId`,`description`,`image`,`name`,`price`,`stock`) VALUES (5,2,'10 pakken koffie','douwe.png','Douwe Egberts',10,10);
