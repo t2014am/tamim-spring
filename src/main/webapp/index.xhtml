@@ -32,18 +32,34 @@
         <ui:define name="content">
 
             <div id="products">
+                <div class="card card-primary">
+                    <div class="card-body row">
+                        <div class="col-3">
+                            <input class="form-control" onkeyup="productList.search(this.value,['name'])" id="name-search-field"
+                                   placeholder="Search Products..."/>
+                        </div>
+                        <div class="col-3">
+                            <button class="sort btn btn-dark btn-block" data-sort="name">
+                                Sort by name
+                            </button>
+                        </div>
+                        <div class="col-3">
+                            <button class="sort btn btn-dark btn-block" data-sort="price">
+                                Sort by price
+                            </button>
+                        </div>
+                        <div class="col-3">
+                        <select class="search form-control" onchange="filterCategory(this.value)" >
+                            <option value="ALL">Alle categorieën</option>
+                            <p:repeat id="categorieen" value="#{categoryController.getCategories()}" var="category">
+                                <option value="#{category.name}">#{category.name}</option>
+                            </p:repeat>
+                        </select>
+                        </div>
+                    </div>
+                </div>
 
-                <input onkeyup="productList.search(this.value,['name'])" id="name-search-field"
-                       placeholder="Search Products..."/>
-                <button class="sort btn btn-dark" data-sort="price">
-                    Sort by price
-                </button>
-                <select class="search" onchange="filterCategory(this.value)">
-                    <option value="ALL">Alle</option>
-                    <p:repeat id="categorieen" value="#{categoryController.getCategories()}" var="category">
-                        <option value="#{category.name}">#{category.name}</option>
-                    </p:repeat>
-                </select>
+
                 <div class="row list">
 
                     <p:repeat value="#{productController.getProducts()}" var="product">
