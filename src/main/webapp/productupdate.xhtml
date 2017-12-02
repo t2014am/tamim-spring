@@ -42,6 +42,9 @@
 
                     <br/>
                     <p:commandButton value="Submit" action="#{productController.updateProduct(productController.product)}" update="@form"/>
+
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
             </h:form>
 
 

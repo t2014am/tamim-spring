@@ -98,6 +98,23 @@
                     <input type="submit" value="Logout" class="btn btn-primary"/>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
+
+                <p:panel rendered="#{request.isUserInRole('ROLE_ADMIN')}">
+                    <p>If you're an admin, you'll see this! </p>
+                </p:panel>
+
+                <p:outputPanel rendered="#{not empty request.remoteUser}">
+                    <form action="logout" method="post">
+                        <input type="submit" value="Logout" class="btn btn-primary"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+                </p:outputPanel>
+
+                <p:outputPanel rendered="#{request.remoteUser}">
+                    <p class="btn btn-primary"><a href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/login?"/></p>
+                </p:outputPanel>
+
+                <h:link value="Login" outcome="login" rendered="#{empty request.remoteUser}" />
             </div>
 
             <script src="js/list.js"/>
