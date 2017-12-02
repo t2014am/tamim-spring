@@ -66,8 +66,13 @@
 
                     <div class="row">
                         <label for="dob" class="col-md-4">Date of birth: </label>
-                        <p:inputText value="#{usersController.newUserDob}" id="dob" converterMessage="Invalid Date"
-                                     pattern="dd-MM-yyyy" navigator="true" class="col-md-4" placeholder="Date of birth here (dd-MM-yyyy)"/>
+                        <p:calendar value="#{usersController.user.dob}"
+                                    id="dob"
+                                    converterMessage="Invalid Date"
+                                    pattern="dd-MM-yyyy"
+                                    navigator="true"
+                                    inputStyleClass="col-md-4"
+                        />
                     </div>
 
 
