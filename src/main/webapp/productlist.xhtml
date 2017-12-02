@@ -22,6 +22,8 @@
                                  value="Order by name A - Z"/>
                 <h:commandButton type="submit" action="#{productController.orderByNameDesc()}"
                                  value="Order by name Z - A"/>
+                
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 
             </h:form>
 
@@ -68,6 +70,9 @@
                         </p:outputPanel>
                     </h:panelGrid>
                 </p:repeat>
+
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
             </h:form>
         </ui:define>
     </ui:composition>
