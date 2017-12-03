@@ -25,8 +25,14 @@ public class OrderProductService {
 
     public void createNewOrderProduct(Orders order, long productId) {
         OrderProduct orderProduct = new OrderProduct();
-        orderProduct.setOrder(order);
-        orderProduct.setProduct(productRepository.findProductById(productId));
+        if (orderProductRepository.getOrderProductByProductId(productId) != null){
+            orderProduct = orderProductRepository.getOrderProductByProductId(productId);
+            orderProduct.setNumber(orderProduct.getNumber() + 1);
+        } else {
+            orderProduct.setOrder(order);
+            orderProduct.setProduct(productRepository.findProductById(productId));
+            orderProduct.setNumber(1);
+        }
         orderProductRepository.save(orderProduct);
     }
 
@@ -35,9 +41,10 @@ public class OrderProductService {
         List<Product> products = new ArrayList<Product>();
 
         for (int i = 0; i < orderProducts.size(); i++){
-            products.add(productRepository.findProductById((long) orderProducts.get(i).getProduct().getId()));
+            products.add(productRepository.findProductById(orderProducts.get(i).getProduct().getId()));
 
         }
         return products;
     }
+
 }

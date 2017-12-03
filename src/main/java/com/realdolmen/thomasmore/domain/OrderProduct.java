@@ -15,6 +15,8 @@ public class OrderProduct implements Serializable {
     @ManyToOne
     private Product product;
 
+    private int number;
+
     public Orders getOrder() {
         return order;
     }
@@ -37,5 +39,13 @@ public class OrderProduct implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

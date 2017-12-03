@@ -5,6 +5,7 @@ import com.realdolmen.thomasmore.domain.Product;
 import com.realdolmen.thomasmore.domain.User;
 import com.realdolmen.thomasmore.service.OrderProductService;
 import com.realdolmen.thomasmore.service.OrdersService;
+import com.realdolmen.thomasmore.service.ProductService;
 import com.realdolmen.thomasmore.service.UserService;
 import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 
@@ -27,18 +28,25 @@ public class OrderController {
     @ManagedProperty("#{userService}")
     private UserService userService;
 
+    @ManagedProperty("#{productService}")
+    private ProductService productService;
+
     private Orders order;
     private Long orderId = null;
+    private List<Product> products = null;
 
 
     public void addProductToOrder(long id){
         if (orderId == null) {
             User user = userService.findUserByEmail("tamim@asefi.com");
             order = ordersService.createOrder(user);
+            orderId = order.getId();
             System.out.println("NEW ORDER CREATED");
         }
         orderProductService.createNewOrderProduct(order, id);
-        System.out.println("NEW ORDER CREATED WITH PRODUCT");
+
+        products = orderProductService.findAllProducts(orderId);
+        System.out.println("PRODUCT ADDED TO ORDER");
     }
 
     public List<Product> getAllProductsOrder() {
@@ -58,11 +66,23 @@ public class OrderController {
         this.userService = userService;
     }
 
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
+
     public Orders getOrder() {
         return order;
     }
 
     public void setOrder(Orders order) {
         this.order = order;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

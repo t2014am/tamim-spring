@@ -20,7 +20,7 @@
             <h2>Productlist</h2>
 
             <h:form>
-                <p:repeat value="#{orderController.allProductsOrder}" var="product">
+                <p:repeat value="#{orderController.products}" var="product">
                     <h:panelGrid columns="2" style="width:100%">
 
 
@@ -48,10 +48,6 @@
                                 <p:column headerText="Update product">
                                     <p:commandLink value="Update" id="updateProduct"
                                                    action="#{productController.toUpdatePage(product.id)}" ajax="false"/>
-                                </p:column>
-                                <p:column headerText="Kopen">
-                                    <p:commandLink value="Update" id="kopen"
-                                                   action="#{orderController.addProductToOrder(product.id)}" ajax="false"/>
                                 </p:column>
 
                                 <hr/>
