@@ -2,7 +2,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsf/html">
 <h:head>
     <script name="jquery/jquery.js" library="primefaces"></script>
 
@@ -62,9 +62,7 @@
                         <a class="nav-link"
                            href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/useroverview.xhtml">User Management</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i>Shoppingcart</a>
-                    </li>
+
 
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
@@ -78,19 +76,46 @@
                     </li>
 
                     <!--<li class="nav-item">-->
-                        <!--<form action="logout" method="post">-->
-                            <!--<input type="submit" value="Logout" class="nav-link"/>-->
-                            <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-                        <!--</form>-->
+                    <!--<form action="logout" method="post">-->
+                    <!--<input type="submit" value="Logout" class="nav-link"/>-->
+                    <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                    <!--</form>-->
                     <!--</li>-->
+                </ul>
+                <ul class="nav navbar-nav pull-right ">
+                    <li class="nav-item dropdown ">
+
+                        <a class="nav-link dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false"><i class="fa  fa-user-circle"></i>#{p:remoteUser()}</a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-primary"
+                             aria-labelledby="navbarDropdownMenuLink">
+                            <c:form>
+                                <c:commandLink rendered="#{empty request.remoteUser}" styleClass="dropdown-item" ><i class="fa  fa-sign-in"></i> Log In</c:commandLink>
+                                <c:commandLink rendered="#{not empty request.remoteUser}" styleClass="dropdown-item" action="#{request.logout()}"><i class="fa  fa-sign-out"></i> Log Out</c:commandLink>
+                                <c:commandLink rendered="#{not empty request.remoteUser}" styleClass="dropdown-item" action="#{request.logout()}"><i class="fa  fa-cogs"></i> My Account</c:commandLink>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </c:form>
+                            <a class="dropdown-item"
+                               href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/userupdate.xhtml">
+                                <i class="fa  fa-cog"></i> My Account</a>
+                            <!--<a class="dropdown-item" href="#"><i class="fa  fa-remove"></i> Log Out</a>-->
+                        </div>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false"><i class="fa  fa-shopping-cart"></i><span class="badge">0</span></a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-primary"
+                             aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Afrekenen</a>
+                            <a class="dropdown-item" href="#">Winkelmandje verwijderen</a>
+                        </div>
+                    </li>
 
                 </ul>
                 <!-- Links -->
 
-                <!-- Search form -->
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
-                </form>
             </div><!-- Collapsible content -->
 
         </nav>
@@ -99,7 +124,6 @@
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
-
     <!--javascript ui -->
 
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>

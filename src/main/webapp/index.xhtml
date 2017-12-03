@@ -39,17 +39,17 @@
                                    id="name-search-field"
                                    placeholder="Search Products..."/>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 col-sm-12">
                             <button class="sort btn btn-dark btn-block" data-sort="name">
                                 Sort by name
                             </button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 col-sm-12">
                             <button class="sort btn btn-dark btn-block" data-sort="price">
                                 Sort by price
                             </button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 col-sm-12">
                             <select class="search form-control" onchange="filterCategory(this.value)">
                                 <option value="ALL">Alle categorieën</option>
                                 <p:repeat id="categorieen" value="#{categoryController.getCategories()}" var="category">
@@ -67,7 +67,7 @@
                         <p:repeat value="#{productController.getProducts()}" var="product">
 
 
-                            <div class="col-4 product">
+                            <div class="col-md-4 col-sm-12 product">
                                 <div class="card">
                                     <div  class="product-image">
                                     <img class="card-img-top" src="images/#{product.image}"
@@ -76,7 +76,7 @@
                                     <div class="card-block">
                                         <h4 class="card-title name">#{product.name}</h4>
                                         <div class="card-text">
-                                            <p class="card-text">#{product.description}</p>
+                                            <p>#{product.description}</p>
                                             <p>Stock: <span class="stock">#{product.stock}</span></p>
                                             <p>Categorie: <span
                                                     class="category">#{categoryController.getCategoryById(product.categoryId).name}</span>
