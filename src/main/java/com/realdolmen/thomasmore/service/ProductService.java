@@ -3,8 +3,14 @@ package com.realdolmen.thomasmore.service;
 import com.realdolmen.thomasmore.domain.Product;
 import com.realdolmen.thomasmore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,6 +49,7 @@ public class ProductService {
     public List<Product> findAllProductsOrderByNameAsc() {
         return productRepository.findAllByOrderByNameAsc();
     }
+
 
     //public List<Product> findAllProductsOrderByNameDesc() {
     //    return productRepository.findAllByNameOrderByNameDesc();

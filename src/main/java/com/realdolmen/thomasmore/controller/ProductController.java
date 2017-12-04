@@ -2,6 +2,7 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.Product;
 import com.realdolmen.thomasmore.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,9 +10,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.util.*;
 
 @ManagedBean
 @SessionScoped
@@ -23,19 +24,21 @@ public class ProductController {
     public List<Product> products;
     public List<Product> productsOrderd;
     public Product product;
-
     private Long productId;
     private String newName;
     private int newPrice;
     private String newDescription;
     private int newStock;
     private Long newCategoryId;
+    @Autowired
+    ServletContext context;
+
 
 
     public List<Product> getProducts() {
-        if (products == null) {
-            products = productService.findAllProducts();
-        }
+
+        products = productService.findAllProducts();
+
         return products;
     }
 
@@ -53,7 +56,7 @@ public class ProductController {
     public String createProduct() {
         productService.createProduct(newName, newPrice, newDescription, newStock, newCategoryId);
         clearForm();
-        return "productlist?faces-redirect=true";
+        return "index?faces-redirect=true";
     }
 
     private void clearForm() {
@@ -66,7 +69,7 @@ public class ProductController {
     public String deleteProduct(Long id) {
         productService.deleteProduct(id);
         addMessage("Product Deleted!");
-        return "redirect:/productlist.xhtml";
+        return "redirect:/index.xhtml";
     }
 
 
@@ -76,10 +79,15 @@ public class ProductController {
         addMessage("update product" + product.getName());
         return "productupdate?faces-redirect=true";
     }
+    public String toProductPage(Long id) {
+        product = productService.getProductById(id);
+        addMessage("Detail product " + product.getName());
+        return "productdetail?faces-redirect=true";
+    }
 
     public String updateProduct(Product product) {
         productService.updateProduct(product);
-        return "productlist?faces-redirect=true";
+        return "index?faces-redirect=true";
     }
 
 

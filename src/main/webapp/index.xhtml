@@ -61,17 +61,18 @@
                 </div>
 
 
-                    <h:form>
-                <div class="row list">
+                <h:form>
+                    <div class="row list">
 
                         <p:repeat value="#{productController.getProducts()}" var="product">
 
 
                             <div class="col-md-4 col-sm-12 product">
                                 <div class="card">
-                                    <div  class="product-image">
-                                    <img class="card-img-top" src="images/#{product.image}"
-                                         alt="Card image cap"/>
+                                    <p:commandLink action="#{productController.toProductPage(product.id)}">
+                                    <div class="product-image">
+                                        <img class="card-img-top" src="#{product.image}"
+                                             alt="Card image cap"/>
                                     </div>
                                     <div class="card-block">
                                         <h4 class="card-title name">#{product.name}</h4>
@@ -83,7 +84,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                    </p:commandLink>
                                 <div class="card-footer">
 
                                     <p:commandLink value="Add To Cart" id="addToCart"
@@ -100,10 +101,12 @@
                                                    ajax="false" styleClass="btn btn-danger"/>
                                     <h4 class="float-right "><b>€ <span class="price">#{product.price}</span></b></h4>
                                 </div>
+                                </div>
                             </div>
                         </p:repeat>
-                </div>
-                    </h:form>
+                    </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </h:form>
             </div>
 
             <div id="toBeModifiedWhenApplicationIsReade!!!">
