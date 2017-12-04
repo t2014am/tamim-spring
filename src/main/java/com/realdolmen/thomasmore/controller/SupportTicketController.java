@@ -5,12 +5,15 @@ import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.service.MessageService;
 import com.realdolmen.thomasmore.service.SupportTicketService;
 import com.realdolmen.thomasmore.service.UsersService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,7 +27,7 @@ public class SupportTicketController {
     @ManagedProperty("#{supportTicketService}")
     private SupportTicketService supportTicketService;
 
-    @ManagedProperty("#{userService}")
+    @ManagedProperty("#{usersService}")
     private UsersService usersService;
 
     @ManagedProperty("#{messageService}")
@@ -38,7 +41,23 @@ public class SupportTicketController {
     private SupportTicket supportTicket;
 
     public List<SupportTicket> getSupportTickets() {
-        return supportTicketService.findAllSupportTickets();
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User loggedInUserObject = (User) principal;
+
+        Users loggedInUser = usersService.findUserByUsername(loggedInUserObject.getUsername());
+
+        if (usersService.hasRole("ROLE_ADMIN") || usersService.hasRole("ROLE_SUPPORT"))
+        {
+            return supportTicketService.findAllSupportTickets();
+        }
+        else
+        {
+            System.out.println("permissions: " + loggedInUser.getId());
+            return supportTicketService.findAllSupportTicketsByCustomer(loggedInUser);
+        }
+
     }
     public SupportTicket getSupportTicketById(long id) {
         return supportTicketService.findSupportTicketById(id);
@@ -52,21 +71,31 @@ public class SupportTicketController {
         return supportTicketService.findAllSupportTicketsBySupport();
     }*/
 
-
-    /*public void createSupportTicket() {
-        this.newCustomer = userService.findUserByEmail("dries@donckers.com");
-        this.newSupport = userService.findUserByEmail("dries@donckers.com");
-        supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
-        addMessage("Support ticket toegevoegd!");
-        clearForm();
-    }*/
-
     public void createSupportTicket() {
-        this.newCustomer = usersService.findUserByEmail("dries@donckers.com");
-        this.newSupport = usersService.findUserByEmail("dries@donckers.com");
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User loggedInUserObject = (User) principal;
+
+        Users loggedInUser = usersService.findUserByUsername(loggedInUserObject.getUsername());
+
+        System.out.println("logged in user: " + loggedInUserObject.getUsername());
+        System.out.println("permissions: " + loggedInUserObject.getAuthorities());
+
+        System.out.println("Supportticket start");
+        //this.newCustomer = usersService.findUserByEmail("dries@donckers.com");
+        this.newCustomer = loggedInUser;
+        this.newSupport = usersService.findUserByUsername("admin");
+        System.out.println("Supportticket after users");
+
+        System.out.println("customer: id: " + this.newCustomer.getId() + " name: " + this.newCustomer.getFirstName() + " " + this.newCustomer.getLastName());
+        System.out.println("support: id: " + this.newSupport.getId() + " name: " + this.newSupport.getFirstName() + " " + this.newSupport.getLastName());
+
         SupportTicket addedTicket = supportTicketService.createSupportTicket(newCustomer, newSupport, newSubject);
+        System.out.println("Supportticket after creation ticket");
         addMessage("Support ticket toegevoegd!");
-        messageService.createMessage(addedTicket, messageToSend, false);
+        messageService.createMessage(addedTicket, messageToSend, false, new Date());
+        System.out.println("Supportticket after creation message");
         addMessage("Bericht verstuurd!");
         clearForm();
     }
@@ -108,6 +137,7 @@ public class SupportTicketController {
         newCustomer = null;
         newSupport = null;
         newSubject = null;
+        messageToSend = null;
     }
 
     private void addMessage(String summary) {

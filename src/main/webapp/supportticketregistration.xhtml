@@ -8,29 +8,13 @@
 
 <h:head>
 
+    <script type="application/javascript" name="jquery/jquery.js" library="primefaces"></script>
+
 </h:head>
 <h:body>
 
-    <h:form style="width:400px;">
-        <p:menubar>
-            <p:submenu label="File">
-                <p:submenu label="Open">
-                    <p:menuitem value="Open Excel File"></p:menuitem>
-                    <p:menuitem value="Open Word File"></p:menuitem>
-                    <p:menuitem value="Open Power Point File"></p:menuitem>
-                </p:submenu>
-                <p:menuitem value="Edit"></p:menuitem>
-                <p:separator/>
-                <p:menuitem value="Exit"></p:menuitem>
-            </p:submenu>
-            <p:submenu label="Help">
-                <p:menuitem value="About JournalDev"></p:menuitem>
-                <p:menuitem value="Contact Us"></p:menuitem>
-                <p:separator/>
-                <p:menuitem value="Help"></p:menuitem>
-            </p:submenu>
-        </p:menubar>
-    </h:form>
+    <ui:composition template="/layout.xhtml">
+    <ui:define name="content">
 
     <h2>Create a support ticket</h2>
 
@@ -42,22 +26,18 @@
         </p:inputText> <br/>
         <p:watermark value="Subject" for="subject"/>
 
-        <!--<p:selectOneMenu id="customer" value="#{supportTicketController.newCustomer}" converter="omnifaces.SelectItemsConverter">
-            <f:selectItems  value="#{userController.getUsers()}"/>
-        </p:selectOneMenu>
-        <p:watermark value="Customer" for="customer"/>
 
-        <p:selectOneMenu id="support" value="#{supportTicketController.newSupport}" converter="omnifaces.SelectItemsConverter">
-            <f:selectItems  value="#{userController.getUsers()}"/>
-        </p:selectOneMenu>
-        <p:watermark value="Customer" for="customer"/>-->
 
         <br/>
         <p:inputTextarea rows="5" cols="30" id="supportText" value="#{supportTicketController.messageToSend}"
                      required="true"
                      requiredMessage="Message is required">
         </p:inputTextarea> <br/><br/>
+        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
         <p:commandButton value="Submit" action="#{supportTicketController.createSupportTicket()}" update="@form"/>
     </h:form>
+
+    </ui:define>
+    </ui:composition>
 </h:body>
 </html>
