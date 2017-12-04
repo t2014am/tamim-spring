@@ -36,10 +36,11 @@ public class ProductController {
 
 
     public List<Product> getProducts() {
-
-        products = productService.findAllProducts();
-
-        return products;
+        if (products == null) {
+           return products = productService.findAllProducts();
+        } else {
+            return products;
+        }
     }
 
     //meldingen tonen
@@ -97,10 +98,10 @@ public class ProductController {
         return "redirect:/productlist.xhtml";
     }
 
-    //public  String orderByNameDesc() {
-    //    products = productService.findAllProductsOrderByNameDesc();
-    //    return "redirect:/productlist.xhtml";
-    //}
+    public  String orderByNameDesc() {
+        products = productService.findAllProductsOrderByNameDesc();
+        return "redirect:/productlist.xhtml";
+    }
 
 
     //getters en setters

@@ -19,7 +19,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findAll();
 
     List<Product> findAllByOrderByNameAsc();
-    //List<Product> findAllByNameOrderByNameDesc();
+    List<Product> findAllByOrderByNameDesc();
 
 
 

@@ -13,57 +13,64 @@
     <ui:composition template="/layout.xhtml">
         <ui:define name="content">
             <h:form>
-                <h:commandButton type="submit" action="#{productController.toNewProductPage()}"
-                                 value="Add new product"/>
-                <br/>
-                <br/>
-
-                <h:commandButton type="submit" action="#{productController.orderByNameAsc()}"
-                                 value="Order by name A - Z"/>
-                <h:commandButton type="submit" action="#{productController.orderByNameDesc()}"
-                                 value="Order by name Z - A"/>
-                
                 <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                <h:commandButton styleClass="btn btn-outline-success btn-lg" type="submit" action="#{productController.toNewProductPage()}"
+                                 value="Add new product" ajax="false"/>
+                <br/>
+                <br/>
 
+                <h:commandButton styleClass="btn btn-outline-info btn-lg" type="submit" action="#{productController.orderByNameAsc()}"
+                                 value="Order by name A - Z" ajax="false"/>
+                <h:commandButton type="submit" action="#{productController.orderByNameDesc()}"
+                                 styleClass="btn btn-outline-info btn-lg" value="Order by name Z - A" ajax="false"/>
             </h:form>
 
             <h2>Productlist</h2>
 
             <h:form>
-                <div class="row">
-                    <p:repeat id="producten" value="#{productController.getProducts()}" var="product">
-                        <div class="col-4">
-                            <div class="card">
-                                <img class="card-img-top" src="images/#{product.image}"
-                                     alt="Card image cap"/>
-                                <div class="card-block">
-                                    <h4 class="card-title name">#{product.name}<span class="float-right "><b>€ <span class="price">#{product.price}</span></b></span></h4>
-                                    <div class="card-text">
-                                        <p>#{product.description}</p>
-                                        <p>Stock: <span class="stock">#{product.stock}</span></p>
-                                        <p>Categorie: <span
-                                                class="category">#{categoryController.getCategoryById(product.categoryId).name}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <p:commandLink value="Update" id="updateProduct"
-                                               action="#{productController.toUpdatePage(product.id)}" ajax="false" styleClass="btn btn-success"/>
-                                <p:commandLink value="Delete" id="deleteProduct"
-                                               actionListener="#{productController.deleteProduct(product.id)}"
-                                               ajax="false" styleClass="btn btn-danger"/>
-
-                            </div>
-                        </div>
-
-                    </p:repeat>
-                </div>
-
-
-
                 <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                <p:dataGrid columns="3" id="producten" value="#{productController.getProducts()}" var="product">
+                    <p:panel>
+                        <h:panelGrid columns="2" style="width:100%">
+                            <p:outputPanel>
+                                <img class="card-img-top" src="#{product.image}"
+                                     alt="Card image cap"/>
+                                <h4>#{product.name}</h4>
+                                <h:panelGrid columns="2" cellpadding="5">
 
+
+                                    <h:outputText value="id:"/>
+                                    <h:outputText value="#{product.id}"/>
+
+                                    <h:outputText value="Price:"/>
+                                    <h:outputText value="#{product.price}"/>
+
+                                    <h:outputText value="Description:"/>
+                                    <h:outputText value="#{product.description}"/>
+
+                                    <h:outputText value="Stock:"/>
+                                    <h:outputText value="#{product.stock}"/>
+
+                                    <h:outputText value="Category:"/>
+                                    <h:outputText value="#{categoryController.getCategoryById(product.categoryId).name}"/>
+
+                                    <p:column headerText="Delete product">
+                                        <h:commandButton styleClass="btn btn-outline-danger btn-lg" value="Delete" id="deleteProduct"
+                                                       actionListener="#{productController.deleteProduct(product.id)}"
+                                                       ajax="false"/>
+                                    </p:column>
+                                    <p:column headerText="Update product">
+                                        <h:commandButton styleClass="btn btn-outline-warning btn-lg" value="Update" id="updateProduct"
+                                                       action="#{productController.toUpdatePage(product.id)}" ajax="false"/>
+                                    </p:column>
+
+
+                                    <br/>
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataGrid>
             </h:form>
         </ui:define>
     </ui:composition>

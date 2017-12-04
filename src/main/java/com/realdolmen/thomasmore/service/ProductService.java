@@ -51,7 +51,7 @@ public class ProductService {
     }
 
 
-    //public List<Product> findAllProductsOrderByNameDesc() {
-    //    return productRepository.findAllByNameOrderByNameDesc();
-    //}
+    public List<Product> findAllProductsOrderByNameDesc() {
+        return productRepository.findAllByOrderByNameDesc();
+    }
 }
