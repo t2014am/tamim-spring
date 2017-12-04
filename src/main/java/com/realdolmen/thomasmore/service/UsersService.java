@@ -7,9 +7,12 @@ import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.repository.AuthoritiesRepository;
 import com.realdolmen.thomasmore.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -57,6 +60,23 @@ public class UsersService {
 
     public Users findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public Users findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public boolean hasRole(String role) {
+        Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)
+                SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        boolean hasRole = false;
+        for (GrantedAuthority authority : authorities) {
+            hasRole = authority.getAuthority().equals(role);
+            if (hasRole) {
+                break;
+            }
+        }
+        return hasRole;
     }
 
     public void deleteUserById(Long id) {

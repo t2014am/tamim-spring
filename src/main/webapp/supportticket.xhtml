@@ -11,40 +11,40 @@
 </h:head>
 <h:body>
 
-    <h:form style="width:400px;">
-        <p:menubar>
-            <p:submenu label="File">
-                <p:submenu label="Open">
-                    <p:menuitem value="Open Excel File"></p:menuitem>
-                    <p:menuitem value="Open Word File"></p:menuitem>
-                    <p:menuitem value="Open Power Point File"></p:menuitem>
-                </p:submenu>
-                <p:menuitem value="Edit"></p:menuitem>
-                <p:separator/>
-                <p:menuitem value="Exit"></p:menuitem>
-            </p:submenu>
-            <p:submenu label="Help">
-                <p:menuitem value="About JournalDev"></p:menuitem>
-                <p:menuitem value="Contact Us"></p:menuitem>
-                <p:separator/>
-                <p:menuitem value="Help"></p:menuitem>
-            </p:submenu>
-        </p:menubar>
-    </h:form>
+    <ui:composition template="/layout.xhtml">
+    <ui:define name="content">
+
 
     <h2>Support ticket</h2>
     <h3>Subject: <h:outputText value="#{supportTicketController.supportTicket.subject}"/></h3>
     <h:form>
         <p:growl id="growl"/>
         <p:repeat value="#{messageController.getMessagesBySupportTicket(supportTicketController.supportTicket)}" var="message">
-            <h:panelGrid columns="2" style="width:100%">
+            <!--<h:panelGrid columns="2" style="width:100%">
                 <p:outputPanel>
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputText value="#{message.supportTicket.customer.firstName}: "/>
                         <h:outputText value="#{message.supportText}"/>
                     </h:panelGrid>
                 </p:outputPanel>
-            </h:panelGrid>
+            </h:panelGrid>-->
+
+            <div class="#{message.bySupportUser == true ? 'chat_list-support' : 'chat_list'}">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <small class="pull-right text-muted"><h:outputText value="#{message.dateAdded.time}"><f:convertDateTime pattern="HH:mm dd-MM-yyyy" /></h:outputText></small>
+                        <div>
+                            <small class="list-group-item-heading text-muted text-primary"><h:outputText value="#{message.bySupportUser == true ? 'Support' : message.supportTicket.customer.firstName}"/></small>
+                            <p class="list-group-item-text">
+                                <h:outputText value="#{message.supportText}"/>
+                            </p>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <br/>
+
         </p:repeat>
 
         <br/>
@@ -54,8 +54,13 @@
 
         </p:inputTextarea> <br/><br/>
 
+        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
         <p:commandButton value="Submit" action="#{messageController.createMessage(supportTicketController.supportTicket)}" update="@form"/>
     </h:form>
+
+    </ui:define>
+    </ui:composition>
 
 </h:body>
 </html>
