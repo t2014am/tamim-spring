@@ -13,6 +13,7 @@
     <ui:composition template="/layout.xhtml">
         <ui:define name="content">
             <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
                 <h:commandButton type="submit" action="#{categoryController.toNewCategoryPage()}"
                                  value="Add new category"/>
             </h:form>
@@ -20,6 +21,7 @@
             <h2>Categorylist</h2>
 
             <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
                 <p:repeat value="#{categoryController.categories}" var="category">
                     <h:panelGrid columns="2" style="width:100%">
 
