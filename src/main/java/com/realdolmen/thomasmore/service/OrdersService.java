@@ -2,7 +2,7 @@ package com.realdolmen.thomasmore.service;
 
 import com.realdolmen.thomasmore.domain.OrderProduct;
 import com.realdolmen.thomasmore.domain.Orders;
-import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.repository.OrderProductRepository;
 import com.realdolmen.thomasmore.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class OrdersService {
     @Autowired
     private OrderProductRepository orderProductRepository;
 
-    public Orders createOrder(User user) {
+    public Orders createOrder(Users user) {
         System.out.println("CREATING ORDER");
         Orders orders = new Orders();
         orders.setUser(user);

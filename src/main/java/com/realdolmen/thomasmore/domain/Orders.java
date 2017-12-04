@@ -9,13 +9,9 @@ public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-<<<<<<< HEAD:src/main/java/com/realdolmen/thomasmore/domain/Orders.java
 
     @ManyToOne
-    private User user;
-=======
     private Users user;
->>>>>>> Team_2:src/main/java/com/realdolmen/thomasmore/domain/Order.java
 
 
     public Long getId() {
@@ -26,13 +22,8 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-<<<<<<< HEAD:src/main/java/com/realdolmen/thomasmore/domain/Orders.java
-    public User getUser() {
-=======
-
-
     public Users getUser() {
->>>>>>> Team_2:src/main/java/com/realdolmen/thomasmore/domain/Order.java
+
         return user;
     }
 

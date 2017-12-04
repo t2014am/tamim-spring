@@ -3,11 +3,11 @@ package com.realdolmen.thomasmore.controller;
 import com.realdolmen.thomasmore.domain.OrderProduct;
 import com.realdolmen.thomasmore.domain.Orders;
 import com.realdolmen.thomasmore.domain.Product;
-import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.service.OrderProductService;
 import com.realdolmen.thomasmore.service.OrdersService;
 import com.realdolmen.thomasmore.service.ProductService;
-import com.realdolmen.thomasmore.service.UserService;
+import com.realdolmen.thomasmore.service.UsersService;
 import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 import org.hibernate.criterion.Order;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +28,8 @@ public class OrderController {
     @ManagedProperty("#{orderProductService}")
     private OrderProductService orderProductService;
 
-    @ManagedProperty("#{userService}")
-    private UserService userService;
+    @ManagedProperty("#{usersService}")
+    private UsersService usersService;
 
     @ManagedProperty("#{productService}")
     private ProductService productService;
@@ -42,7 +42,7 @@ public class OrderController {
 
     public void addProductToOrder(long id){
         if (orderId == null) {
-            User user = userService.findUserByEmail("tamim@asefi.com");
+            Users user = usersService.findUserByEmail("tamim@asefi.com");
             order = ordersService.createOrder(user);
             orderId = order.getId();
             System.out.println("NEW ORDER CREATED");
@@ -82,8 +82,8 @@ public class OrderController {
     }
 
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUsersService(UsersService userService) {
+        this.usersService = userService;
     }
 
     public void setProductService(ProductService productService) {
