@@ -14,6 +14,11 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .footer {
     position: absolute;
@@ -23,4 +28,93 @@ body {
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
     background-color: #f5f5f5;
+}
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.product-image {
+    display: inline-block; /* change the default display type to inline-block */
+    overflow: hidden;      /* hide the overflow */
+}
+.product-image img{
+    max-width: 100%;
+
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.card:hover .product-image img{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.product
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.card-text, .card-title
+{
+    margin-left:10px;
+}
+.card-block
+{
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;""
+}
+.card-title {
+    font-weight: bolder;
+
+}
+.card-footer
+{
+    background-color: rgba(255,255,255,0,7);
+}
+/*.dropdown-menu*/
+/*{*/
+    /*background-color: rgba(0,0,0,0.3);*/
+    /*color:white;*/
+/*}*/
+/*.dropdown-item*/
+/*{*/
+    /*color:white;*/
+/*}*/
+/*.dropdown-item a:hover*/
+/*{*/
+    /*background-color: rgba(0,0,0,0.7);*/
+    /*color:deepskyblue;*/
+/*}*/
+
+.chat_list .list-group-item {
+    padding: 5px 4px;
+    min-height: 50px;
+}
+
+.chat_list-support .list-group-item {
+    padding: 5px 4px;
+    min-height: 50px;
+    background-color: #c6eaff; !important
+}
+
+@media (max-width: 768px) {
+    .chat_list .list-group-item {
+        min-height: inherit;
+    }
+}
+.chat_list .list-group-item-text {
+    /*word-wrap: break-word;*/
+    display: flex;
+    overflow: auto;
+
+}
+
+.chat_list .pull-left {
+    width: 55px;
+    text-align: center;
 }

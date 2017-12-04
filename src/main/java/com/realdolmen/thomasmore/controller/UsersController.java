@@ -1,15 +1,16 @@
 package com.realdolmen.thomasmore.controller;
 
-import com.realdolmen.thomasmore.domain.User;
-import com.realdolmen.thomasmore.service.UserService;
-import org.springframework.web.servlet.view.RedirectView;
+import com.realdolmen.thomasmore.domain.Authorities;
+import com.realdolmen.thomasmore.domain.Users;
+import com.realdolmen.thomasmore.service.UsersService;
+import sun.rmi.runtime.Log;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.io.Console;
 import java.util.Date;
 import java.util.List;
 
@@ -18,11 +19,11 @@ import java.util.List;
  */
 @ManagedBean
 @SessionScoped
-public class UserController {
+public class UsersController {
 
     //Autowired kunnen we niet gebruiken in JSF, daarom gebruiken we hier dit om een spring bean te injecteren.
-    @ManagedProperty("#{userService}")
-    private UserService userService;
+    @ManagedProperty("#{usersService}")
+    private UsersService userService;
 
     private Long userId = new Long(0);
     private String newUserFirstName;
@@ -33,14 +34,20 @@ public class UserController {
     private Date newUserDob;
     private Date newUserGender;
 
-    private User user;
+    //REQUIRED BY SPRING SECURITY
+    private boolean enabled = true;
+    private String username;
+
+    private Authorities auth;
+
+    private Users user;
 
 
-    public List<User> getUsers() {
+    public List<Users> getUsers() {
         return userService.findAllUsers();
     }
 
-    public User getUserById(Long id) {
+    public Users getUserById(Long id) {
         System.out.println("getUserById detail here: " + id);
         return userService.findUserById(id);
     }
@@ -51,32 +58,37 @@ public class UserController {
 //        return "redirect:/useroverview.xhtml";
     }
 
-    public String updateUser(User user) {
+    public String updateUser(Users user) {
         this.user = user;
-        System.out.println("user details here: " + this.user.getFirstName() +  ' ' + user.getFirstName());
+        System.out.println("users details here: " + this.user.getFirstName() + ' ' + user.getFirstName());
         System.out.println(user.getLastName());
+
+        userService.updateUser(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getTel(), user.getPassword(), user.getDob());
+        addMessage("User updated!");
+
         return "userupdate";
     }
 
 
-//    public void createUser() {
-//        userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
-//        addMessage("User toegevoegd!");
-//        clearForm();
-//    }
-
-    public String createOrUpdateUser() {
-        if (userId == 0 ) {
-            userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
-            addMessage("User toegevoegd!");
-        } else {
-            userService.updateUser(userId, newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
-            addMessage("User updated!");
-        }
+    public void createUser() {
+//        userService.createUser("tamim", "asdf", "asdf@fds.com","tel","asdff",date,true,"tamim");
+        userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob, enabled, username);
+        addMessage("User toegevoegd!");
         clearForm();
-        addMessage("The requested action is done! ");
-        return "redirect:/customer/list";
     }
+
+//    public String createOrUpdateUser() {
+//        if (userId == 0 ) {
+//            userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
+//            addMessage("User toegevoegd!");
+//        } else {
+//            userService.updateUser(userId, newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob);
+//            addMessage("User updated!");
+//        }
+//        clearForm();
+//        addMessage("The requested action is done! ");
+//        return "redirect:/customer/list";
+//    }
 
     private void clearForm() {
         newUserFirstName = null;
@@ -156,18 +168,18 @@ public class UserController {
         this.userId = userId;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUsers(Users user) {
         this.user = user;
     }
 
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
      */
-    public void setUserService(UserService userService) {
+    public void setUserService(UsersService userService) {
         this.userService = userService;
     }
 }

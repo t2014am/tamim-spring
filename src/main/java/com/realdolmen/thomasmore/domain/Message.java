@@ -2,6 +2,7 @@ package com.realdolmen.thomasmore.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Message implements Serializable {
@@ -17,6 +18,8 @@ public class Message implements Serializable {
     private String supportText;
 
     private boolean bySupportUser;
+
+    private Date dateAdded;
 
     public Long getId() {
         return id;
@@ -49,4 +52,13 @@ public class Message implements Serializable {
     public void setBySupportUser(boolean bySupportUser) {
         this.bySupportUser = bySupportUser;
     }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
 }

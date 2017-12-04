@@ -2,17 +2,17 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.Message;
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.service.MessageService;
 import com.realdolmen.thomasmore.service.SupportTicketService;
-import com.realdolmen.thomasmore.service.UserService;
+import com.realdolmen.thomasmore.service.UsersService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,9 +29,13 @@ public class MessageController {
     @ManagedProperty("#{messageService}")
     private MessageService messageService;
 
+    @ManagedProperty("#{usersService}")
+    private UsersService usersService;
+
     private SupportTicket newSupportTicket;
     private String newSupportText;
     private boolean newBySupportUser;
+    private Date newDateAdded;
 
 
     public List<Message> getMessages() {
@@ -43,13 +47,21 @@ public class MessageController {
 
 
     public void createMessage() {
-        messageService.createMessage(newSupportTicket, newSupportText, newBySupportUser);
+        this.newDateAdded = new Date();
+        messageService.createMessage(newSupportTicket, newSupportText, newBySupportUser, newDateAdded);
         addMessage("Bericht verzonden!");
         clearForm();
     }
 
     public void createMessage(SupportTicket supportTicket) {
-        messageService.createMessage(supportTicket, newSupportText, false);
+
+        this.newBySupportUser = false;
+        if (usersService.hasRole("ROLE_ADMIN") || usersService.hasRole("ROLE_SUPPORT"))
+        {
+            this.newBySupportUser = true;
+        }
+        this.newDateAdded = new Date();
+        messageService.createMessage(supportTicket, newSupportText, newBySupportUser, newDateAdded);
         addMessage("Bericht verzonden!");
         clearForm();
     }
@@ -58,6 +70,7 @@ public class MessageController {
         newSupportTicket = null;
         newSupportText = null;
         newBySupportUser = false;
+
     }
 
     private void addMessage(String summary) {
@@ -90,6 +103,14 @@ public class MessageController {
         this.newBySupportUser = newBySupportUser;
     }
 
+    public Date getNewDateAdded() {
+        return newDateAdded;
+    }
+
+    public void setNewDateAdded(Date newDateAdded) {
+        this.newDateAdded = newDateAdded;
+    }
+
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
      */
@@ -99,5 +120,9 @@ public class MessageController {
 
     public void setMessageService(MessageService messageService) {
         this.messageService = messageService;
+    }
+
+    public void setUsersService(UsersService usersService) {
+        this.usersService = usersService;
     }
 }

@@ -2,12 +2,11 @@ package com.realdolmen.thomasmore.service;
 
 import com.realdolmen.thomasmore.domain.Message;
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.User;
 import com.realdolmen.thomasmore.repository.MessageRepository;
-import com.realdolmen.thomasmore.repository.SupportTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,11 +15,12 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public void createMessage(SupportTicket supportTicket, String supportText, boolean bySupportUser) {
+    public void createMessage(SupportTicket supportTicket, String supportText, boolean bySupportUser, Date dateAdded) {
         Message message = new Message();
         message.setSupportTicket(supportTicket);
         message.setSupportText(supportText);
         message.setBySupportUser(bySupportUser);
+        message.setDateAdded(dateAdded);
 
 
         messageRepository.save(message);

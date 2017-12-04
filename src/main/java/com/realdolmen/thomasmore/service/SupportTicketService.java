@@ -1,7 +1,7 @@
 package com.realdolmen.thomasmore.service;
 
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.repository.SupportTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class SupportTicketService {
     @Autowired
     private SupportTicketRepository supportTicketRepository;
 
-    public SupportTicket createSupportTicket(User customer, User support, String subject) {
+    public SupportTicket createSupportTicket(Users customer, Users support, String subject) {
         SupportTicket supportTicket = new SupportTicket();
         supportTicket.setCustomer(customer);
         supportTicket.setSupport(support);
@@ -26,12 +26,13 @@ public class SupportTicketService {
         supportTicketRepository.save(supportTicket);
 
         return findSupportTicketById(supportTicket.getId());
+        //return null;
     }
 
     public List<SupportTicket> findAllSupportTickets() {
         return supportTicketRepository.findAll();
     }
-    public List<SupportTicket> findAllSupportTicketsByCustomer(User customer) {
+    public List<SupportTicket> findAllSupportTicketsByCustomer(Users customer) {
         return supportTicketRepository.findAllByCustomer(customer);
     }
     public SupportTicket findSupportTicketById(long id) {return supportTicketRepository.findById(id);}

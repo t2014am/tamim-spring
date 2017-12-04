@@ -1,7 +1,7 @@
 package com.realdolmen.thomasmore.repository;
 
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.User;
+import com.realdolmen.thomasmore.domain.Users;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +16,8 @@ public interface SupportTicketRepository extends CrudRepository<SupportTicket, L
     /**
      * Beschrijf in de method name wat je wilt dat spring uit de database haalt, zo simpel is het!
      */
-    List<SupportTicket> findAllByCustomer(User customer);
-    SupportTicket findBySupport(User support);
+    List<SupportTicket> findAllByCustomer(Users customer);
+    SupportTicket findBySupport(Users support);
     List<SupportTicket> findAll();
     //List<SupportTicket> findAllByUser(User user);
     SupportTicket findById(long id);

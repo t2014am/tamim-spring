@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class User implements Serializable {
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,9 @@ public class User implements Serializable {
     private String password;
     private Date dob;
     private String gender;
+
+    private String username = email;
+    private boolean enabled = false;
 
     @OneToMany (mappedBy="customer")
     private List<SupportTicket> customerUserSupportTickets = new ArrayList<SupportTicket>();
@@ -104,6 +107,22 @@ public class User implements Serializable {
 
     public void setSupportUserSupportTickets(List<SupportTicket> supportUserSupportTickets) {
         this.supportUserSupportTickets = supportUserSupportTickets;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
