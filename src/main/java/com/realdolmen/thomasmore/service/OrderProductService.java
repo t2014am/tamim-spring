@@ -9,6 +9,7 @@ import com.realdolmen.thomasmore.domain.Orders;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,23 @@ public class OrderProductService {
             orderProduct.setNumber(1);
         }
         orderProductRepository.save(orderProduct);
+    }
+
+    public void lowerNumberOrderProduct(long productId, int number){
+        OrderProduct orderProduct = orderProductRepository.getOrderProductByProductId(productId);
+        orderProduct.setNumber(number - 1);
+        orderProductRepository.save(orderProduct);
+    }
+
+    @Transactional
+    public void deleteOrderProduct(long orderId, long productId){
+        orderProductRepository.removeByOrderIdAndProductId(orderId, productId);
+    }
+
+    public OrderProduct getOrderProductByProductId(long id){
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct = orderProductRepository.getOrderProductByProductId(id);
+        return orderProduct;
     }
 
     public List<Product> findAllProducts(long id){

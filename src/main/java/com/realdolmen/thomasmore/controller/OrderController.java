@@ -1,5 +1,6 @@
 package com.realdolmen.thomasmore.controller;
 
+import com.realdolmen.thomasmore.domain.OrderProduct;
 import com.realdolmen.thomasmore.domain.Orders;
 import com.realdolmen.thomasmore.domain.Product;
 import com.realdolmen.thomasmore.domain.User;
@@ -8,6 +9,8 @@ import com.realdolmen.thomasmore.service.OrdersService;
 import com.realdolmen.thomasmore.service.ProductService;
 import com.realdolmen.thomasmore.service.UserService;
 import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
+import org.hibernate.criterion.Order;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -34,6 +37,7 @@ public class OrderController {
     private Orders order;
     private Long orderId = null;
     private List<Product> products = null;
+    private int totalPrice = 0;
 
 
     public void addProductToOrder(long id){
@@ -49,8 +53,24 @@ public class OrderController {
         System.out.println("PRODUCT ADDED TO ORDER");
     }
 
-    public List<Product> getAllProductsOrder() {
-        return orderProductService.findAllProducts(order.getId());
+    public int getNumberOrderProduct(long id){
+        OrderProduct orderProduct = orderProductService.getOrderProductByProductId(id);
+        return orderProduct.getNumber();
+    }
+
+    public void deleteItemShoppingCart(long id){
+        OrderProduct orderProduct = orderProductService.getOrderProductByProductId(id);
+        if (orderProduct.getNumber() > 1) {
+            orderProductService.lowerNumberOrderProduct(id, orderProduct.getNumber());
+        } else {
+            orderProductService.deleteOrderProduct(orderId, id);
+            products = orderProductService.findAllProducts(orderId);
+        }
+    }
+
+    public void clearShoppingCart(){
+        ordersService.clearShoppingCart(orderId);
+        products = orderProductService.findAllProducts(orderId);
     }
 
     public void setOrdersService(OrdersService ordersService) {
@@ -84,5 +104,19 @@ public class OrderController {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public int getTotalPrice() {
+        totalPrice = 0;
+        for (int i = 0; i < products.size(); i++){
+            OrderProduct orderProduct = orderProductService.getOrderProductByProductId(products.get(i).getId());
+            int number = orderProduct.getNumber();
+            totalPrice += number * products.get(i).getPrice();
+        }
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

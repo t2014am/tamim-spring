@@ -11,4 +11,6 @@ public interface OrderProductRepository extends CrudRepository<OrderProduct, Lon
 
     List<OrderProduct> findOrderProductByOrderId(long id);
     OrderProduct getOrderProductByProductId(long id);
+    void removeAllByOrderId(long id);
+    void removeByOrderIdAndProductId(long orderId, long productId);
 }
