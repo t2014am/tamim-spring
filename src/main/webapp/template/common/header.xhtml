@@ -53,18 +53,19 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/productlist.xhtml">Products</a>
+                           href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/userregistration.xhtml">User Registration</a>
                     </li>
+                    <h:panelGroup rendered="#{request.isUserInRole('ROLE_ADMIN')}">
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/userregistration.xhtml">User Registration</a>
+                           href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/productlist.xhtml">Product Management</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
                            href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/useroverview.xhtml">User Management</a>
                     </li>
 
-
+                    </h:panelGroup>
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
