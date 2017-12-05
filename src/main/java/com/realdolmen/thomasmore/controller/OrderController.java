@@ -10,6 +10,8 @@ import com.realdolmen.thomasmore.service.ProductService;
 import com.realdolmen.thomasmore.service.UsersService;
 import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 import org.hibernate.criterion.Order;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.faces.bean.ManagedBean;
@@ -38,12 +40,17 @@ public class OrderController {
     private Long orderId = null;
     private List<Product> products = null;
     private int totalPrice = 0;
+    private int numberItems = 0;
 
 
     public void addProductToOrder(long id){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User loggedInUserObject = (User) principal;
+        String username = loggedInUserObject.getUsername();
+        Users loggedInUser = usersService.findUserByUsername(username);
         if (orderId == null) {
-            Users user = usersService.findUserByEmail("tamim@asefi.com");
-            order = ordersService.createOrder(user);
+            order = ordersService.createOrder(loggedInUser);
             orderId = order.getId();
             System.out.println("NEW ORDER CREATED");
         }
@@ -71,6 +78,7 @@ public class OrderController {
     public void clearShoppingCart(){
         ordersService.clearShoppingCart(orderId);
         products = orderProductService.findAllProducts(orderId);
+        orderId = null;
     }
 
     public void setOrdersService(OrdersService ordersService) {
@@ -118,5 +126,21 @@ public class OrderController {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public int getNumberItems() {
+        int numberItems = 0;
+        if (products != null) {
+            for (int i = 0; i < products.size(); i++){
+                OrderProduct orderProduct = orderProductService.getOrderProductByProductId(products.get(i).getId());
+                int number = orderProduct.getNumber();
+                numberItems += number;
+            }
+        }
+        return numberItems;
+    }
+
+    public void setNumberItems(int numberItems) {
+        this.numberItems = numberItems;
     }
 }

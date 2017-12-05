@@ -14,6 +14,7 @@
         <ui:define name="content">
             <h2>Shopping Cart</h2>
             <h:form>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <h:panelGroup rendered="#{not empty orderController.products}">
                     <table style="width:100%">
                         <tr>
