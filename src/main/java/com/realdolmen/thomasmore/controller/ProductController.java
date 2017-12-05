@@ -36,11 +36,7 @@ public class ProductController {
 
 
     public List<Product> getProducts() {
-        if (products == null) {
            return products = productService.findAllProducts();
-        } else {
-            return products;
-        }
     }
 
     //meldingen tonen
