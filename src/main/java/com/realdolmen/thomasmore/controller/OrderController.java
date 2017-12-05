@@ -49,6 +49,7 @@ public class OrderController {
         User loggedInUserObject = (User) principal;
         String username = loggedInUserObject.getUsername();
         Users loggedInUser = usersService.findUserByUsername(username);
+
         if (orderId == null) {
             order = ordersService.createOrder(loggedInUser);
             orderId = order.getId();
