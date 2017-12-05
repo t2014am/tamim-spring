@@ -13,7 +13,7 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 300px;
     background: url(../images/background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -24,10 +24,11 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
+    /* Set the fixed height of the footer here
+    height: 60px;*/
     line-height: 60px; /* Vertically center the text there */
     background-color: #f5f5f5;
+    color: white;
 }
 * {
     -moz-box-sizing: border-box;
