@@ -30,6 +30,9 @@ public class ProductController {
     private String newDescription;
     private int newStock;
     private Long newCategoryId;
+    private String newImage;
+
+
     @Autowired
     ServletContext context;
 
@@ -57,7 +60,7 @@ public class ProductController {
     public String createProduct() {
         productService.createProduct(newName, newPrice, newDescription, newStock, newCategoryId);
         clearForm();
-        return "index?faces-redirect=true";
+        return "productnew?faces-redirect=true";
     }
 
     private void clearForm() {
@@ -88,7 +91,7 @@ public class ProductController {
 
     public String updateProduct(Product product) {
         productService.updateProduct(product);
-        return "index?faces-redirect=true";
+        return "productupdate?faces-redirect=true";
     }
 
 
@@ -153,6 +156,13 @@ public class ProductController {
         this.product = product;
     }
 
+    public String getNewImage() {
+        return newImage;
+    }
+
+    public void setNewImage(String newImage) {
+        this.newImage = newImage;
+    }
     //getters en setters voor categorie
     public Long getNewCategoryId() {
         return newCategoryId;
