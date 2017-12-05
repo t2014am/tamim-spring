@@ -1,19 +1,16 @@
 package com.realdolmen.thomasmore.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
-import java.util.Date;
-
 @Entity
-public class Order implements Serializable {
+public class Orders implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
     private Users user;
 
 
@@ -25,9 +22,8 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-
-
     public Users getUser() {
+
         return user;
     }
 
