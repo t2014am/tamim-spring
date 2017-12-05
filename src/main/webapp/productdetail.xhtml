@@ -61,6 +61,7 @@
 
                                     <p:commandLink value="Add To Cart" id="addToCart"
                                                    rendered="#{not request.isUserInRole('ROLE_ADMIN')}"
+                                                   action="#{orderController.addProductToOrder(productController.product.id)}"
                                                    ajax="false"
                                                    styleClass="btn btn-primary"/>
                                     <p:commandLink value="Update" id="updateProduct"

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Productlist</title>
+</h:head>
+<h:body>
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <h:commandButton type="submit" action="#{productController.toNewProductPage()}"
+                                 value="Add new product"/>
+            </h:form>
+
+            <h2>Productlist</h2>
+
+            <h:form>
+                <p:repeat value="#{orderController.products}" var="product">
+                    <h:panelGrid columns="2" style="width:100%">
+
+
+                        <p:outputPanel>
+                            <h4>#{product.name}</h4>
+                            <h:panelGrid columns="2" cellpadding="5">
+
+                                <h:outputText value="id:"/>
+                                <h:outputText value="#{product.id}"/>
+
+                                <h:outputText value="Price:"/>
+                                <h:outputText value="#{product.price}"/>
+
+                                <h:outputText value="Description:"/>
+                                <h:outputText value="#{product.description}"/>
+
+                                <h:outputText value="Stock:"/>
+                                <h:outputText value="#{product.stock}"/>
+
+                                <p:column headerText="Delete product">
+                                    <p:commandLink value="Delete" id="deleteProduct"
+                                                   actionListener="#{productController.deleteProduct(product.id)}"
+                                                   ajax="false"/>
+                                </p:column>
+                                <p:column headerText="Update product">
+                                    <p:commandLink value="Update" id="updateProduct"
+                                                   action="#{productController.toUpdatePage(product.id)}" ajax="false"/>
+                                </p:column>
+
+                                <hr/>
+                                <br/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:repeat>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+</html>
