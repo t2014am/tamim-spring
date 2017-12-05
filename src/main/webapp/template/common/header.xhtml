@@ -111,7 +111,7 @@
                              aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/shoppingcart.xhtml">Open cart</a>
                             <a class="dropdown-item" href="#">Afrekenen</a>
-                            <a class="dropdown-item" href="#">Winkelmandje verwijderen</a>
+                            <p:commandLink action="#{orderController.clearShoppingCart}" class="dropdown-item" href="#" >Winkelmandje verwijderen</p:commandLink>
                         </div>
                     </li>
 
