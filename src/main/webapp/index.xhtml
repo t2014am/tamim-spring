@@ -87,7 +87,7 @@
                                     </p:commandLink>
                                 <div class="card-footer">
 
-                                    <p:commandLink value="Add To Cart" id="addToCart"
+                                    <p:commandLink value="Add To Cart" id="addToCart" disabled="#{empty request.remoteUser}"
                                                    rendered="#{not request.isUserInRole('ROLE_ADMIN')}"
                                                    action="#{orderController.addProductToOrder(product.id)}"
                                                    ajax="false"
