@@ -16,7 +16,7 @@
             <h:form>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <h:panelGroup rendered="#{not empty orderController.products}">
-                    <table style="width:100%">
+                    <table style="width:100%" class="table table-inverse ">
                         <tr>
                             <th>Product name</th>
                             <th>Product description</th>
@@ -32,7 +32,7 @@
                                 <td>#{product.price}</td>
                                 <td>#{orderController.getNumberOrderProduct(product.id)}</td>
                                 <td>#{orderController.getNumberOrderProduct(product.id) * product.price}</td>
-                                <td><p:commandLink value="Delete" id="DeleteOrderProduct"
+                                <td><p:commandLink styleClass="btn btn-warning" value="Delete" id="DeleteOrderProduct"
                                                    action="#{orderController.deleteItemShoppingCart(product.id)}" ajax="false"/></td>
                             </tr>
                         </p:repeat>
@@ -42,12 +42,12 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <th>#{orderController.totalPrice}</th>
+                            <th><h4>#{orderController.totalPrice}</h4></th>
                         </tr>
                     </table>
                     <p:commandButton value="Clear cart" action="#{orderController.clearShoppingCart}" update="@form"/>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{empty orderController.products}">
+                <h:panelGroup rendered="#{empty orderController.products} euro">
                     <h4>No products</h4>
                 </h:panelGroup>
             </h:form>
