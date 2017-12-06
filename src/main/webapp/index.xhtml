@@ -74,8 +74,8 @@
                                         <img class="card-img-top" src="#{product.image}"
                                              alt="Card image cap"/>
                                     </div>
-                                    <div class="card-block">
-                                        <h4 class="card-title name">#{product.name}</h4>
+                                    <div class="card-body">
+                                        <h4 class="card-title name">#{product.name}<span class="float-right "><b>€ <span class="price">#{product.price}</span></b></span></h4>
                                         <div class="card-text">
                                             <p>#{product.description}</p>
                                             <p>Stock: <span class="stock">#{product.stock}</span></p>
@@ -87,11 +87,13 @@
                                     </p:commandLink>
                                 <div class="card-footer">
 
-                                    <p:commandLink value="Add To Cart" id="addToCart" disabled="#{empty request.remoteUser}"
+                                    <p:commandLink id="addToCart" disabled="#{empty request.remoteUser}"
                                                    rendered="#{not request.isUserInRole('ROLE_ADMIN')}"
                                                    action="#{orderController.addProductToOrder(product.id)}"
                                                    ajax="false"
-                                                   styleClass="btn btn-primary"/>
+                                                   styleClass="btn btn-primary btn-block">
+                                        <i class="fa fa-shopping-cart"></i> Add To Cart
+                                    </p:commandLink>
                                     <p:commandLink value="Update" id="updateProduct"
                                                    rendered="#{request.isUserInRole('ROLE_ADMIN')}"
                                                    action="#{productController.toUpdatePage(product.id)}" ajax="false"
@@ -100,7 +102,7 @@
                                                    rendered="#{request.isUserInRole('ROLE_ADMIN')}"
                                                    actionListener="#{productController.deleteProduct(product.id)}"
                                                    ajax="false" styleClass="btn btn-danger"/>
-                                    <h4 class="float-right "><b>€ <span class="price">#{product.price}</span></b></h4>
+
                                 </div>
                                 </div>
                             </div>
