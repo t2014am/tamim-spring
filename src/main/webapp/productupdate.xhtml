@@ -40,12 +40,32 @@
                 <p>Stock:</p>
                 <p:inputText id="stock" value="#{productController.product.stock}"/> <br/>
                 <p:watermark value="Stock" for="stock"/>
+                <p>Category:</p>
+                <h:selectOneMenu value="#{productController.product.categoryId}">
+                    <f:selectItems value="#{categoryController.categories}" var="category" itemValue="#{category.id}"
+                                   itemLabel="#{category.name}"/>
+
+                </h:selectOneMenu>
+                <img id="productImage" class="card-img-top" src="#{productController.product.image}"
+                     alt="Card image cap"/>
+                <label for="image">Product Image:</label>
+
+                <h:selectOneMenu id="image" onchange="changeImage(this.value)" value="#{productController.newImage}">
+                    <f:selectItems value="#{request.getServletContext().getResourcePaths('/images/products').toArray()}" var="image"
+                                   itemLabel="#{image.substring(image.lastIndexOf('/')+ 1) }" itemValue="#{image.substring(1)}" />
+                </h:selectOneMenu>
 
                 <br/>
                 <p:commandButton value="Submit" action="#{productController.updateProduct(productController.product)}"
                                  update="@form"/>
             </h:form>
 
+            <script type="application/javascript">
+                function changeImage(path)
+                {
+                    document.getElementById("productImage").src = path;
+                }
+            </script>
 
         </ui:define>
     </ui:composition>
