@@ -56,26 +56,22 @@
                            href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/userregistration.xhtml">User Registration</a>
                     </li>
                     <h:panelGroup rendered="#{request.isUserInRole('ROLE_ADMIN')}">
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/productlist.xhtml">Product Management</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/useroverview.xhtml">User Management</a>
-                    </li>
 
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false"><i class="fa fa-tasks"></i> Manage</a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/productlist.xhtml"><i class="fa fa-shopping-basket"></i> Products</a>
+                                <a class="dropdown-item" href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/categorylist.xhtml"><i class="fa fa-tags"></i> Categories</a>
+                                <a class="dropdown-item" href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/useroverview.xhtml"><i class="fa fa-users"></i> Users</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/userregistration.xhtml"><i class="fa fa-support"></i> Customer Support</a>
+                        </li>
                     </h:panelGroup>
-                    <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
 
                     <!--<li class="nav-item">-->
                     <!--<form action="logout" method="post">-->
@@ -92,14 +88,22 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown-primary"
                              aria-labelledby="navbarDropdownMenuLink">
                             <c:form>
-                                <c:commandLink rendered="#{empty request.remoteUser}" action="#{request.login('tamim','tamim')}" styleClass="dropdown-item" ><i class="fa  fa-sign-in"></i> Log In</c:commandLink>
-                                <c:commandLink rendered="#{not empty request.remoteUser}" styleClass="dropdown-item" action="#{request.logout()}"><i class="fa  fa-sign-out"></i> Log Out</c:commandLink>
-                                <c:commandLink rendered="#{not empty request.remoteUser}" styleClass="dropdown-item" action="#{request.logout()}"><i class="fa  fa-cogs"></i> My Account</c:commandLink>
+                                <c:commandLink rendered="#{empty request.remoteUser}"
+                                               action="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/login"
+                                               styleClass="dropdown-item"><i
+                                        class="fa  fa-sign-in"></i> Log In</c:commandLink>
+                                <c:commandLink rendered="#{empty request.remoteUser}"
+                                               action="#{request.login('tamim','tamim')}" styleClass="dropdown-item"><i
+                                        class="fa  fa-sign-in"></i> Log In As Tamim The ADMIM</c:commandLink>
+                                <c:commandLink rendered="#{not empty request.remoteUser}" styleClass="dropdown-item"
+                                               action="#{request.logout()}"><i
+                                        class="fa  fa-sign-out"></i> Log Out</c:commandLink>
+                                <c:commandLink rendered="#{not empty request.remoteUser}" styleClass="dropdown-item"
+                                               action="#{usersController.toUpdatePageName(request.remoteUser)}"><i
+                                        class="fa  fa-cogs"></i> My Account</c:commandLink>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </c:form>
-                            <a class="dropdown-item"
-                               href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/userupdate.xhtml">
-                                <i class="fa  fa-cog"></i> My Account</a>
+
                             <!--<a class="dropdown-item" href="#"><i class="fa  fa-remove"></i> Log Out</a>-->
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -107,12 +111,15 @@
                     </li>
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa  fa-shopping-cart"></i><span class="badge">#{orderController.numberItems}</span></a>
+                           aria-expanded="false"><i class="fa  fa-shopping-cart"></i><span
+                                class="badge">#{orderController.numberItems}</span></a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-primary"
                              aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/shoppingcart.xhtml">Open cart</a>
+                            <a class="dropdown-item"
+                               href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/shoppingcart.xhtml">Open cart</a>
                             <a class="dropdown-item" href="#">Afrekenen</a>
-                            <p:commandLink action="#{orderController.clearShoppingCart}" class="dropdown-item" href="#" >Winkelmandje verwijderen</p:commandLink>
+                            <p:commandLink action="#{orderController.clearShoppingCart}" class="dropdown-item"
+                                           href="#">Winkelmandje verwijderen</p:commandLink>
                         </div>
                     </li>
 
