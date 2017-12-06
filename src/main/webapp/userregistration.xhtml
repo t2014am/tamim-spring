@@ -18,23 +18,25 @@
                 <h2>Registration Form</h2>
                 <h:form>
                     <p:growl id="growl"/>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 ">
+                    <div class="row justify-content-around">
+                        <div class="col-md-5 ">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title">Registration Form</div>
+                                    <div class="card-title">General Data</div>
                                 </div>
                                 <div class="card-block ">
                                     <div class="form-group">
                                         <label for="firstName" class="">First name: </label>
-                                        <p:inputText id="firstName" value="#{usersController.newUserFirstName}" required="true"
+                                        <p:inputText id="firstName" value="#{usersController.newUserFirstName}"
+                                                     required="true"
                                                      requiredMessage="First Name is required" placeholder="First name"
                                                      class="form-control"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="lastName" class="col-form-labe">Last name: </label>
-                                        <p:inputText id="lastName" value="#{usersController.newUserLastName}" placeholder="Last name"
+                                        <p:inputText id="lastName" value="#{usersController.newUserLastName}"
+                                                     placeholder="Last name"
                                                      class="form-control"/>
                                     </div>
 
@@ -42,20 +44,24 @@
                                         <label for="email" class="col-form-label">Email: </label>
                                         <p:inputText id="email" value="#{usersController.newUserEmail}"
                                                      validatorMessage="Invalid Email"
-                                                     placeholder="Email" class="form-control">
+                                                     placeholder="Email" class="form-control"
+
+                                        >
                                             <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"/>
                                         </p:inputText>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="tel" class="col-form-label">Telephone number: </label>
-                                        <p:inputText id="tel" value="#{usersController.newUserTel}" placeholder="Telephone number"
+                                        <p:inputText id="tel" value="#{usersController.newUserTel}"
+                                                     placeholder="Telephone number"
                                                      class="form-control"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password" class="col-form-label">Password: </label>
-                                        <p:password id="password" value="#{usersController.newUserPassword}" required="true"
+                                        <p:password id="password" value="#{usersController.newUserPassword}"
+                                                    required="true"
                                                     requiredMessage="Password is required" match="passwordCheck"
                                                     validatorMessage="Password should be of length from 5 to 15 chars and the two password fields should match"
                                                     placeholder="Password" class="form-control">
@@ -65,7 +71,8 @@
 
                                     <div class="form-group">
                                         <label for="passwordCheck" class="col-form-label">Password check: </label>
-                                        <p:password id="passwordCheck" required="true" requiredMessage="Password is required"
+                                        <p:password id="passwordCheck" required="true"
+                                                    requiredMessage="Password is required"
                                                     placeholder="Password check" class="form-control"/>
                                     </div>
 
@@ -77,15 +84,57 @@
                                                     converterMessage="Invalid Date"
                                                     pattern="dd-MM-yyyy"
                                                     navigator="true"
-                                                    inputStyleClass="form-control"
-                                        />
+                                                    inputStyleClass="form-control"/>
                                     </div>
 
 
                                     <div>
-                                        <p:commandButton value="Submit" action="#{usersController.createUser()}" update="@form"
+                                        <p:commandButton value="Submit" action="#{usersController.createUser()}"
+                                                         update="@form"
                                                          class="col-md-offset-4"/>
                                     </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Shipping information: </div>
+                                </div>
+                                <div class="card-block ">
+                                    <div class="form-group">
+                                        <label for="address" class="">Address: </label>
+                                        <p:inputText id="address" value="#{usersController.newAddress}"
+                                                     required="true"
+                                                     requiredMessage="Address is required" placeholder="ie. 420 Struggle Street "
+                                                     class="form-control"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="city" class="col-form-label">City: </label>
+                                        <p:inputText id="city" value="#{usersController.newCity}"
+                                                     placeholder="ie. Turnhout"
+                                                     class="form-control"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="postal" class="col-form-label">Postal Code: </label>
+                                        <p:inputText id="postal" value="#{usersController.newPostalCode}"
+                                                     requiredMessage="Postal code is required"
+                                                     placeholder="ie. 2300" class="form-control">
+
+                                        </p:inputText>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="state" class="col-form-label">State: </label>
+                                        <p:inputText id="state" value="#{usersController.newState}"
+                                                     placeholder="ie. Antwerp"
+                                                     class="form-control"/>
+                                    </div>
+
 
 
 
@@ -95,7 +144,6 @@
                     </div>
 
                     <p:inputText type="hidden" id="id" value="#{usersController.userId}"/><br/>
-
 
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

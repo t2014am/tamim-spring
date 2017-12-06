@@ -40,7 +40,7 @@
 
                     <p:column headerText="Update User">
                         <p:commandButton value="Update" id="updateUser2" styleClass="btn btn-danger"
-                                         action="#{usersController.updateUser(user)}" ajax="true"/>
+                                         action="#{usersController.toUpdatePage(user.id)}" ajax="false"/>
                     </p:column>
 
                     <p:link outcome="userregistration" value="Bookmark">

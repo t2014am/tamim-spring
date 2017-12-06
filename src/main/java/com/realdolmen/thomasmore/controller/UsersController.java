@@ -10,7 +10,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import java.io.Console;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.Date;
 import java.util.List;
 
@@ -27,13 +30,19 @@ public class UsersController {
 
     private Long userId = new Long(0);
     private String newUserFirstName;
+
+
+
     private String newUserLastName;
     private String newUserEmail;
     private String newUserTel;
     private String newUserPassword;
     private Date newUserDob;
     private Date newUserGender;
-
+    private String newAddress;
+    private String newPostalCode;
+    private String newCity;
+    private String newState;
     //REQUIRED BY SPRING SECURITY
     private boolean enabled = true;
     private String username;
@@ -57,7 +66,16 @@ public class UsersController {
 //        addMessage("User Deleted!");
 //        return "redirect:/useroverview.xhtml";
     }
-
+    public String toUpdatePage(Long id) {
+        user = userService.findUserById(id);
+        addMessage("update username" + user.getUsername());
+        return "userupdate?faces-redirect=true";
+    }
+    public String toUpdatePageName(String username) {
+        user = userService.findUserByUsername(username);
+        addMessage("update username" + user.getUsername());
+        return "productupdate?faces-redirect=true";
+    }
     public String updateUser(Users user) {
         this.user = user;
         System.out.println("users details here: " + this.user.getFirstName() + ' ' + user.getFirstName());
@@ -72,7 +90,7 @@ public class UsersController {
 
     public void createUser() {
 //        userService.createUser("tamim", "asdf", "asdf@fds.com","tel","asdff",date,true,"tamim");
-        userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob, enabled, username);
+        userService.createUser(newUserFirstName, newUserLastName, newUserEmail, newUserTel, newUserPassword, newUserDob, enabled, username,newAddress,newCity,newPostalCode,newState);
         addMessage("User toegevoegd!");
         clearForm();
     }
@@ -175,7 +193,37 @@ public class UsersController {
     public void setUsers(Users user) {
         this.user = user;
     }
+    public String getNewAddress() {
+        return newAddress;
+    }
 
+    public void setNewAddress(String newAddress) {
+        this.newAddress = newAddress;
+    }
+
+    public String getNewPostalCode() {
+        return newPostalCode;
+    }
+
+    public void setNewPostalCode(String newPostalCode) {
+        this.newPostalCode = newPostalCode;
+    }
+
+    public String getNewCity() {
+        return newCity;
+    }
+
+    public void setNewCity(String newCity) {
+        this.newCity = newCity;
+    }
+
+    public String getNewState() {
+        return newState;
+    }
+
+    public void setNewState(String newState) {
+        this.newState = newState;
+    }
     /**
      * Deze setter MOET aanwezig zijn, anders kan spring deze service niet injecteren.
      */

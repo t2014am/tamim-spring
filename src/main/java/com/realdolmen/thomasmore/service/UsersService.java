@@ -29,7 +29,7 @@ public class UsersService {
     private PasswordEncoder passwordEncoder;
 
 
-    public void createUser(String firstName, String lastName, String email, String tel, String password, Date dob, boolean enabled, String username) {
+    public void createUser(String firstName, String lastName, String email, String tel, String password, Date dob, boolean enabled, String username,String address,String city,String postalCode,String state) {
         Users user = new Users();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -41,6 +41,10 @@ public class UsersService {
         user.setPassword(passwordEncoder.encode(password));
         user.setDob(dob);
         user.setEnabled(enabled);
+        user.setAddress(address);
+        user.setCity(city);
+        user.setPostalCode(postalCode);
+        user.setState(state);
 //        user.setGender(gender);
 
 
