@@ -119,3 +119,7 @@ body {
     width: 55px;
     text-align: center;
 }
+.table-inverse
+{
+    background-color: rgba(0,0,0,0.5);
+}
