@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 //                .antMatchers("/css/**").permitAll().antMatchers("/js/**").permitAll().antMatchers("/images/**").permitAll().antMatchers("/fonts/**").permitAll().antMatchers("/font/**").permitAll()
                 .antMatchers("/login.xhtml").permitAll()
+                .antMatchers("/login2.xhtml").permitAll()
                 .antMatchers("/index.xhtml").permitAll()
                 .antMatchers("/userregistration.xhtml").permitAll()
                 .antMatchers("/userupdate.xhtml").permitAll()
@@ -51,12 +52,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/supportticket.xhtml").permitAll()
                 .antMatchers("/supportticketregistration.xhtml").permitAll()
                 .antMatchers("/useroverview.xhtml").hasRole("ADMIN")
+                .antMatchers("/productupdate.xhtml").hasRole("ADMIN")
+                .antMatchers("/productnew.xhtml").hasRole("ADMIN")
+                .antMatchers("/categoryupdate.xhtml").hasRole("ADMIN")
+                .antMatchers("/categorynew.xhtml").hasRole("ADMIN")
                 .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
 //                .loginPage("/login.xhtml")
+//                .loginProcessingUrl("/login/process")
+
                 .defaultSuccessUrl("/index.xhtml")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
 
 //                .and()
 //                .logout()
