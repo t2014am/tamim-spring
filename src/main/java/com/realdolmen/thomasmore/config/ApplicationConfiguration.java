@@ -31,7 +31,7 @@ public class ApplicationConfiguration {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/dbjavaadv");
         dataSource.setUsername("root");
-        dataSource.setPassword("mysql");
+        dataSource.setPassword("");
 
         return dataSource;
     }
@@ -62,7 +62,7 @@ public class ApplicationConfiguration {
 
     Properties jpaProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         // the create-drop means create the table in the database when we run the project, delete the table when we stop the project!
         // create means create the tables, but let them be! After we restart the project, it is gonna automatically drop the table and create a new one!
         // update should be used after we have created the tables!!!
