@@ -1,1 +1,1 @@
-web: java -cp target/classes/:target/dependency/* com.realdolmen.thomasmore
+web: java -cp target/*
