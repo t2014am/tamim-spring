@@ -38,9 +38,13 @@ public class ApplicationConfiguration {
         */
 //        POSTGRESQL:
         dataSource.setDriverClassName("org.postgresql.Driver");
+//        String localhost = "ec2-54-217-207-242.eu-west-1.compute.amazonaws.com:5432";
+        String localhost = "localhost";
+        dataSource.setUrl("jdbc:postgresql://" + localhost + "/d646l2ctoo4pqq");
         dataSource.setUsername("abmbvkcczyzasi");
         dataSource.setPassword("c9742db68a71e3109efb7a040070bf1862b7e40ed9a8e50533d6dfa5b14b65f7");
-        dataSource.setUrl("postgres://abmbvkcczyzasi:c9742db68a71e3109efb7a040070bf1862b7e40ed9a8e50533d6dfa5b14b65f7@ec2-54-217-207-242.eu-west-1.compute.amazonaws.com:5432/d646l2ctoo4pqq");
+
+//        dataSource.setUrl("postgres://abmbvkcczyzasi:c9742db68a71e3109efb7a040070bf1862b7e40ed9a8e50533d6dfa5b14b65f7@ec2-54-217-207-242.eu-west-1.compute.amazonaws.com:5432/d646l2ctoo4pqq");
 
 
         return dataSource;

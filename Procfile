@@ -1,0 +1,1 @@
+java -Dserver.port=$PORT $JAVA_OPTS -war target/thomas-more-starter-1.0-SNAPSHOT.war
