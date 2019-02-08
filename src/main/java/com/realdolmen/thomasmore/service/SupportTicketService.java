@@ -19,22 +19,21 @@ public class SupportTicketService {
 
     public SupportTicket createSupportTicket(Users customer, Users support, String subject) {
         SupportTicket supportTicket = new SupportTicket();
-//        supportTicket.setCustomer(customer);
-//        supportTicket.setSupport(support);
+        supportTicket.setCustomer(customer);
+        supportTicket.setSupport(support);
         supportTicket.setSubject(subject);
 
         supportTicketRepository.save(supportTicket);
 
-//        return findSupportTicketById(supportTicket.getId());
-        return null;
+        return findSupportTicketById(supportTicket.getId());
+        //return null;
     }
 
     public List<SupportTicket> findAllSupportTickets() {
         return supportTicketRepository.findAll();
     }
     public List<SupportTicket> findAllSupportTicketsByCustomer(Users customer) {
-//        return supportTicketRepository.findAllByCustomer(customer);
-        return null;
+        return supportTicketRepository.findAllByCustomer(customer);
     }
     public SupportTicket findSupportTicketById(long id) {return supportTicketRepository.findById(id);}
 

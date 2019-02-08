@@ -38,11 +38,6 @@
                         <h:outputText value="#{user.getDob()}"/>
                     </p:column>
 
-                    <p:column headerText="Update User">
-                        <p:commandButton value="Update" id="updateUser2"
-                                         action="#{usersController.updateUser(user)}" ajax="true"/>
-                    </p:column>
-
                     <!--<p:link outcome="userregistration" value="Bookmark">-->
                     <!--<f:param name="productId" value="10"/>-->
                     <!--</p:link>-->
@@ -55,11 +50,11 @@
             </h:form>
 
 
-
             <h2>Registration Form</h2>
             <h:form>
                 <p:growl id="growl"/>
-                <p:inputText id="id" value="#{usersController.user.id}"/><br/>
+
+                <p:inputText type="hidden" id="id" value="#{usersController.user.id}"/><br/>
 
 
                 <div>
@@ -109,20 +104,22 @@
 
                 <div>
                     <label for="dob" class="col-md-4">Date of birth: </label>
-                    <div class="col-md-4">
-                        <p:calendar value="#{usersController.user.dob}"
-                                    id="dob"
-                                    converterMessage="Invalid Date"
-                                    pattern="dd-MM-yyyy"
-                                    navigator="true"
-                                    class="col-md-4"/>
-                    </div>
+                    <p:calendar value="#{usersController.user.dob}"
+                                id="dob"
+                                converterMessage="Invalid Date"
+                                pattern="dd-MM-yyyy"
+                                navigator="true"
+                                inputStyleClass="col-md-4"
+                    />
                 </div>
 
                 <div>
-                    <p:commandButton value="Submit" action="#{usersController.createOrUpdateUser()}" update="@form"
+                    <p:commandButton value="Submit" action="#{usersController.updateUser(usersController.user)}"
+                                     update="@form"
                                      class="col-md-offset-4"/>
                 </div>
+
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             </h:form>
         </ui:define>

@@ -13,27 +13,45 @@
     <ui:composition template="/layout.xhtml">
         <ui:define name="content">
 
-            <h4>Update category</h4>
             <h:form>
-                    <p:growl id="growl"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <p:growl id="growl"/>
+                <h4>Update category</h4>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
 
-                    <!--Inputveld voor naam van category-->
-                    <p>Name:</p>
-                    <p:inputText id="name" value="#{categoryController.category.name}"
-                                 required="true"
-                                 requiredMessage="Name is required">
-                    </p:inputText> <br/>
-                    <p:watermark value="Name" for="name"/>
+                    <div class="card ">
+                        <div class="card-header">
+                            Update Category
+                        </div>
+                        <div class="card-body">
+                            <p:outputLabel for="name" value="Name"/>
+                            <p:inputText id="name" value="#{categoryController.category.name}"
+                                         required="true"
+                                         requiredMessage="Name is required"
+                                         styleClass="form-control"
+                            >
+                            </p:inputText>
+                            <p:outputLabel for="description" value="Description"/>
+                            <p:inputText id="description" value="#{categoryController.category.description}"
 
-                    <!--Inputveld voor omschrijving van category-->
-                    <p>Description:</p>
-                    <p:inputText id="description" value="#{categoryController.category.description}"/><br/>
-                    <p:watermark value="Description" for="description"/>
+                                         requiredMessage="Name is required"
+                                         styleClass="form-control"
+                            >
+                            </p:inputText>
+                        </div>
+                            <p:commandButton value="Submit" styleClass="btn btn-green"
+                                             action="#{categoryController.updateCategory(categoryController.category)}"
+                                             update="@form"/>
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
 
 
 
-                    <br/>
-                    <p:commandButton value="Submit" action="#{categoryController.updateCategory(categoryController.category)}" update="@form"/>
             </h:form>
 
 

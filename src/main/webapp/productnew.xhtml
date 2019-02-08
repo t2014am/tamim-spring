@@ -14,6 +14,7 @@
         <ui:define name="content">
             <h4>Add product</h4>
             <h:form>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <p:growl id="growl"/>
 
                 <!--Inputveld voor naam van product-->
@@ -41,13 +42,28 @@
 
                 <p>Category:</p>
                 <h:selectOneMenu value="#{productController.newCategoryId}">
-                    <f:selectItems value="#{categoryController.categories}" var="category" itemValue="#{category.id}" itemLabel="#{category.name}"/>
+                    <f:selectItems value="#{categoryController.categories}" var="category" itemValue="#{category.id}"
+                                   itemLabel="#{category.name}"/>
 
                 </h:selectOneMenu>
                 <br/>
+                <p:watermark for="image" value="Product image:"></p:watermark>
+                <img id="productImage" width="350px" src="#{productController.product.image}"
+                     alt="Card image cap"/>
+                <h:selectOneMenu id="image" onchange="changeImage(this.value)" value="#{productController.newImage}">
+                    <f:selectItems value="#{request.getServletContext().getResourcePaths('/images/products').toArray()}" var="image"
+                                   itemLabel="#{image.substring(image.lastIndexOf('/')+ 1) }" itemValue="#{image.substring(1)}" />
+                </h:selectOneMenu>
                 <br/>
-                <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form"/>
+                <br/>
+                <p:commandButton value="Submit" action="#{productController.createProduct()}" update="@form" ajax="false"/>
             </h:form>
+            <script type="application/javascript">
+                function changeImage(path)
+                {
+                    document.getElementById("productImage").src = path;
+                }
+            </script>
         </ui:define>
     </ui:composition>
 

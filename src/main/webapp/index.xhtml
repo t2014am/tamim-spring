@@ -32,44 +32,84 @@
         <ui:define name="content">
 
             <div id="products">
+                <div class="card card-primary">
+                    <div class="card-body row">
+                        <div class="col-3">
+                            <input class="form-control" onkeyup="productList.search(this.value,['name'])"
+                                   id="name-search-field"
+                                   placeholder="Search Products..."/>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <button class="sort btn btn-dark btn-block" data-sort="name">
+                                Sort by name
+                            </button>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <button class="sort btn btn-dark btn-block" data-sort="price">
+                                Sort by price
+                            </button>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <select class="search form-control" onchange="filterCategory(this.value)">
+                                <option value="ALL">Alle categorieën</option>
+                                <p:repeat id="categorieen" value="#{categoryController.getCategories()}" var="category">
+                                    <option value="#{category.name}">#{category.name}</option>
+                                </p:repeat>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                <input onkeyup="productList.search(this.value,['name'])" id="name-search-field"
-                       placeholder="Search Products..."/>
-                <button class="sort btn btn-dark" data-sort="price">
-                    Sort by price
-                </button>
-                <select class="search" onchange="filterCategory(this.value)">
-                    <option value="ALL">Alle</option>
-                    <p:repeat id="categorieen" value="#{categoryController.getCategories()}" var="category">
-                        <option value="#{category.name}">#{category.name}</option>
-                    </p:repeat>
-                </select>
-                <div class="row list">
 
-                    <p:repeat value="#{productController.getProducts()}" var="product">
+                <h:form>
+                    <div class="row list">
+
+                        <p:repeat value="#{productController.getProducts()}" var="product">
 
 
-                        <div class="col-4">
-                            <div class="card">
-                                <img class="card-img-top" src="http://via.placeholder.com/350x150"
-                                     alt="Card image cap"/>
-                                <div class="card-block">
-                                    <h4 class="card-title name">#{product.name}</h4>
-                                    <div class="card-text">
-                                        <p>Stock: <span class="stock">#{product.stock}</span></p>
-                                        <p>Categorie: <span
-                                                class="category">#{categoryController.getCategoryById(product.categoryId).name}</span>
-                                        </p>
+                            <div class="col-md-4 col-sm-12 product">
+                                <div class="card">
+                                    <p:commandLink action="#{productController.toProductPage(product.id)}">
+                                    <div class="product-image">
+                                        <img class="card-img-top" src="#{product.image}"
+                                             alt="Card image cap"/>
                                     </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title name">#{product.name}<span class="float-right "><b>€ <span class="price">#{product.price}</span></b></span></h4>
+                                        <div class="card-text">
+                                            <p>#{product.description}</p>
+                                            <p>Stock: <span class="stock">#{product.stock}</span></p>
+                                            <p>Categorie: <span
+                                                    class="category">#{categoryController.getCategoryById(product.categoryId).name}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    </p:commandLink>
+                                <div class="card-footer">
+
+                                    <p:commandLink id="addToCart" disabled="#{empty request.remoteUser}"
+                                                   rendered="#{not request.isUserInRole('ROLE_ADMIN')}"
+                                                   action="#{orderController.addProductToOrder(product.id)}"
+                                                   ajax="false"
+                                                   styleClass="btn btn-primary btn-block">
+                                        <i class="fa fa-shopping-cart"></i> Add To Cart
+                                    </p:commandLink>
+                                    <p:commandLink value="Update" id="updateProduct"
+                                                   rendered="#{request.isUserInRole('ROLE_ADMIN')}"
+                                                   action="#{productController.toUpdatePage(product.id)}" ajax="false"
+                                                   styleClass="btn btn-success"/>
+                                    <p:commandLink value="Delete" id="deleteProduct"
+                                                   rendered="#{request.isUserInRole('ROLE_ADMIN')}"
+                                                   actionListener="#{productController.deleteProduct(product.id)}"
+                                                   ajax="false" styleClass="btn btn-danger"/>
+
+                                </div>
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <button class="btn btn-outline-info">Add To Cart</button>
-                                <h4 class="float-right "><b>€ <span class="price">#{product.price}</span></b></h4>
-                            </div>
-                        </div>
-                    </p:repeat>
-                </div>
+                        </p:repeat>
+                    </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </h:form>
             </div>
 
             <div id="toBeModifiedWhenApplicationIsReade!!!">
@@ -81,6 +121,24 @@
                     <input type="submit" value="Logout" class="btn btn-primary"/>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
+
+                <p:panel rendered="#{request.isUserInRole('ROLE_ADMIN')}">
+                    <p>If you're an admin, you'll see this! </p>
+                </p:panel>
+
+                <p:outputPanel rendered="#{not empty request.remoteUser}">
+                    <form action="logout" method="post">
+                        <input type="submit" value="Logout" class="btn btn-primary"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+                </p:outputPanel>
+
+                <p:outputPanel rendered="#{request.remoteUser}">
+                    <p class="btn btn-primary"><a href="http://localhost:8080/thomas-more-starter-1.0-SNAPSHOT/login?"/>
+                    </p>
+                </p:outputPanel>
+
+                <h:link value="Login" outcome="login" rendered="#{empty request.remoteUser}"/>
             </div>
 
             <script src="js/list.js"/>

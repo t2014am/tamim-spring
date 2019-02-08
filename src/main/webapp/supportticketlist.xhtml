@@ -10,11 +10,12 @@
     <title>Support tickets</title>
 </h:head>
 <h:body>
-    <!--<ui:composition template="/layout.xhtml">
-        <ui:define name="content">-->
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
 
             <h4>Support tickets</h4>
             <h:form>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
                 <!--<p:repeat value="#{supportTicketController.supportTickets}" var="supportTicket">
                     <h:panelGrid columns="2" style="width:100%">
                         <p:outputPanel>
@@ -37,8 +38,8 @@
                     </p:dataTable>
     <!--</p:repeat>-->
             </h:form>
-<!--</ui:define>
-</ui:composition>-->
+</ui:define>
+</ui:composition>
 
 
     </h:body>

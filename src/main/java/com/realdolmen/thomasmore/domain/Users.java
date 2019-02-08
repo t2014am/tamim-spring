@@ -19,6 +19,44 @@ public class Users implements Serializable {
     private String password;
     private Date dob;
     private String gender;
+    //private String country;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    private String postalCode;
+    private String city;
+    private String State;
 
     private String username = email;
     private boolean enabled = false;

@@ -33,13 +33,14 @@
                         <h:outputText value="#{user.dob}"/>
                     </p:column>
 
+                    <!--<p:column headerText="Update User">-->
+                        <!--<p:commandButton value="Update" id="updateUser"-->
+                                         <!--action="#{usersController.getUserById(user.id)}" ajax="false"/>-->
+                    <!--</p:column>-->
+
                     <p:column headerText="Update User">
-                        <p:commandButton value="Update" id="updateUser"
-                                         action="#{usersController.getUserById(user.id)}" ajax="false"/>
-                    </p:column>
-                    <p:column headerText="Update User">
-                        <p:commandButton value="Update2" id="updateUser2"
-                                         action="#{usersController.updateUser(user)}" ajax="true"/>
+                        <p:commandButton value="Update" id="updateUser2" styleClass="btn btn-danger"
+                                         action="#{usersController.toUpdatePage(user.id)}" ajax="false"/>
                     </p:column>
 
                     <p:link outcome="userregistration" value="Bookmark">
@@ -47,10 +48,13 @@
                     </p:link>
 
                     <p:column headerText="Delete User">
-                        <p:commandButton value="Delete" id="deleteUser"
+                        <p:commandButton value="Delete" id="deleteUser" styleClass="btn btn-danger"
                                          actionListener="#{usersController.deleteUserById(user.id)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
+
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
             </h:form>
         </ui:define>
     </ui:composition>

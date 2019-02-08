@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <script name="jquery/jquery.js" library="primefaces"></script>
+    <script>alert('me does work');</script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Webshop</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <!-- Own css -->
+    <link href="css/style.css" rel="stylesheet"/>
+    rel="stylesheet"
+    type="text/css"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,‌​100italic,300,300ita‌​lic,400italic,500,50‌​0italic,700,700itali‌​c,900italic,900'
+          rel='stylesheet' type='text/css'/>
+
+    <!-- javascript ui -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+</h:head>
+<h:body>
+
+    <ui:composition template="/layout.xhtml">
+        <ui:define name="content">
+
+            <div id="products">
+                <h:form>
+                    <div class="row justify-content-center">
+
+                        <div class="col-md-8  col-sm-12 product">
+                                <div class="card">
+                                    <div class="card-block">
+                                    <div class="row">
+
+                                    <div class="product-image col-md-4">
+                                        <img class="img-fluid" src="#{productController.product.image}"
+                                             alt="Card image cap"/>
+                                    </div>
+                                        <div class="col-md-8">
+
+                                        <h4 class="card-title name">#{productController.product.name}</h4>
+                                        <div class="card-text">
+                                            <p:outputLabel>#{productController.product.description}</p:outputLabel>
+                                            <p>Stock: <span class="stock">#{productController.product.stock}</span></p>
+                                            <p>Categorie:
+                                                <span class="category">#{categoryController.getCategoryById(productController.product.categoryId).name}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                        </div>
+                                    </div>
+                                <div class="card-footer">
+
+                                    <p:commandLink value="Add To Cart" id="addToCart"  disabled="#{empty request.remoteUser}
+                                                   rendered="#{not request.isUserInRole('ROLE_ADMIN')}"
+                                                   action="#{orderController.addProductToOrder(productController.product.id)}"
+                                                   ajax="false"
+                                                   styleClass="btn btn-primary"/>
+                                    <p:commandLink value="Update" id="updateProduct"
+                                                   rendered="#{request.isUserInRole('ROLE_ADMIN')}"
+                                                   action="#{productController.toUpdatePage(productController.product.id)}" ajax="false"
+                                                   styleClass="btn btn-success"/>
+                                    <p:commandLink value="Delete" id="deleteProduct"
+                                                   rendered="#{request.isUserInRole('ROLE_ADMIN')}"
+                                                   actionListener="#{productController.deleteProduct(productController.product.id)}"
+                                                   ajax="false" styleClass="btn btn-danger"/>
+                                    <h4 class="float-right "><b>€ <span class="price">#{productController.product.price}</span></b></h4>
+                                </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </h:form>
+            </div>
+
+        </ui:define>
+
+    </ui:composition>
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+
+    <!--javascript ui -->
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"/>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"/>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"/>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"/>
+    <!--List.JS-->
+
+
+</h:body>
+</html>
