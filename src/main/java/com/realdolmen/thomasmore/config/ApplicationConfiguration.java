@@ -38,7 +38,7 @@ public class ApplicationConfiguration {
         */
 //        POSTGRESQL:
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost/d646l2ctoo4pqq");
+        dataSource.setUrl("jdbc:postgresql://ec2-54-217-207-242.eu-west-1.compute.amazonaws.com/d646l2ctoo4pqq");
         dataSource.setUsername("abmbvkcczyzasi");
         dataSource.setPassword("c9742db68a71e3109efb7a040070bf1862b7e40ed9a8e50533d6dfa5b14b65f7");
 
