@@ -6,10 +6,7 @@ import com.realdolmen.thomasmore.repository.SupportTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-
-import static org.primefaces.component.keyboard.Keyboard.PropertyKeys.password;
 
 @Service
 public class SupportTicketService {

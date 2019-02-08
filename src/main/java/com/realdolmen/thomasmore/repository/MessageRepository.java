@@ -2,7 +2,6 @@ package com.realdolmen.thomasmore.repository;
 
 import com.realdolmen.thomasmore.domain.Message;
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.Users;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,6 @@ package com.realdolmen.thomasmore.controller;
 
 import com.realdolmen.thomasmore.domain.Message;
 import com.realdolmen.thomasmore.domain.SupportTicket;
-import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.service.MessageService;
 import com.realdolmen.thomasmore.service.SupportTicketService;
 import com.realdolmen.thomasmore.service.UsersService;

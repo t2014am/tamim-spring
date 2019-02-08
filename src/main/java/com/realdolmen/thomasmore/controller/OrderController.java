@@ -8,16 +8,12 @@ import com.realdolmen.thomasmore.service.OrderProductService;
 import com.realdolmen.thomasmore.service.OrdersService;
 import com.realdolmen.thomasmore.service.ProductService;
 import com.realdolmen.thomasmore.service.UsersService;
-import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
-import org.hibernate.criterion.Order;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean

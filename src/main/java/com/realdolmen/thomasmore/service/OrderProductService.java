@@ -1,12 +1,11 @@
 package com.realdolmen.thomasmore.service;
 
 import com.realdolmen.thomasmore.domain.OrderProduct;
+import com.realdolmen.thomasmore.domain.Orders;
 import com.realdolmen.thomasmore.domain.Product;
 import com.realdolmen.thomasmore.repository.OrderProductRepository;
 import com.realdolmen.thomasmore.repository.OrdersRepository;
 import com.realdolmen.thomasmore.repository.ProductRepository;
-import com.realdolmen.thomasmore.domain.Orders;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

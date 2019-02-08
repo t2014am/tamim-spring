@@ -1,6 +1,5 @@
 package com.realdolmen.thomasmore.service;
 
-import com.realdolmen.thomasmore.domain.OrderProduct;
 import com.realdolmen.thomasmore.domain.Orders;
 import com.realdolmen.thomasmore.domain.Users;
 import com.realdolmen.thomasmore.repository.OrderProductRepository;
