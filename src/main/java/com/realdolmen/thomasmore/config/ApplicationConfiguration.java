@@ -28,10 +28,20 @@ public class ApplicationConfiguration {
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+//        MYSQL:
+        /*
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/dbjavaadv");
+        dataSource.setUrl("jdbc:mysql://localhost:3307/dbjavaadv");
         dataSource.setUsername("root");
-        dataSource.setPassword("mysql");
+        dataSource.setPassword("usbw");
+        */
+//        POSTGRESQL:
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost/d646l2ctoo4pqq");
+        dataSource.setUsername("abmbvkcczyzasi");
+        dataSource.setPassword("c9742db68a71e3109efb7a040070bf1862b7e40ed9a8e50533d6dfa5b14b65f7");
+
 
         return dataSource;
     }
@@ -66,7 +76,10 @@ public class ApplicationConfiguration {
         // the create-drop means create the table in the database when we run the project, delete the table when we stop the project!
         // create means create the tables, but let them be! After we restart the project, it is gonna automatically drop the table and create a new one!
         // update should be used after we have created the tables!!!
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
+
+//        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
+
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
         return properties;
     }
